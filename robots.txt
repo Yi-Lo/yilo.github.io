@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Allow: /tags/
+Allow: /posts/
+Allow: /about/
+Allow: /archives/
+Allow: /readings/
+Allow: /categories/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /images/
+Disallow: /fonts/
+Disallow: /lib/
+Disallow: /fancybox/
+
+Sitemap: https://yilo.top/sitemap.xml
+Sitemap: https://yilo.top/baidusitemap.xml
