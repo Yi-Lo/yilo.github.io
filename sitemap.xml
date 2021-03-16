@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yilo.top/posts/2021/03334513da/</loc>
+    
+    <lastmod>2021-03-16</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yilo.top/readings/index.html</loc>
     
     <lastmod>2021-03-15</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://yilo.top/about/index.html</loc>
     
     <lastmod>2021-03-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/posts/2021/03334513da/</loc>
-    
-    <lastmod>2021-03-13</lastmod>
     
   </url>
   
@@ -46,7 +46,7 @@
 
   <url>
     <loc>https://yilo.top/</loc>
-    <lastmod>2021-03-15</lastmod>
+    <lastmod>2021-03-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -54,7 +54,7 @@
   
   <url>
     <loc>https://yilo.top/tags/%E6%8E%A2%E7%B4%A2/</loc>
-    <lastmod>2021-03-15</lastmod>
+    <lastmod>2021-03-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -63,7 +63,7 @@
   
   <url>
     <loc>https://yilo.top/categories/%E8%B5%B7%E7%82%B9/</loc>
-    <lastmod>2021-03-15</lastmod>
+    <lastmod>2021-03-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
