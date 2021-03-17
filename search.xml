@@ -86,9 +86,9 @@
           </div>]]></content>
       <categories>
         <category>算法</category>
-        <category>LCOF</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Array</tag>
         <tag>Hash Table</tag>

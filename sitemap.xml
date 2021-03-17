@@ -60,6 +60,13 @@
 
   
   <url>
+    <loc>https://yilo.top/tags/LCOF/</loc>
+    <lastmod>2021-03-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yilo.top/tags/Easy/</loc>
     <lastmod>2021-03-17</lastmod>
     <changefreq>daily</changefreq>
@@ -91,13 +98,6 @@
   
   <url>
     <loc>https://yilo.top/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-03-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/categories/%E7%AE%97%E6%B3%95/LCOF/</loc>
     <lastmod>2021-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
