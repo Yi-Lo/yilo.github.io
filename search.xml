@@ -1,11 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>和为s的连续正数序列</title>
+    <url>/posts/2021/03ba44daea/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。<br>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。  </p>
+<p>示例 1：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 9</span><br><span class="line">输出：[[2,3,4],[4,5]]</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 15</span><br><span class="line">输出：[[1,2,3,4,5],[4,5,6],[7,8]]</span><br></pre></td></tr></table></figure></p>
+<p>限制：<br><code>1 &lt;= target &lt;= 10^5</code></p>
+<span id="more"></span>
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>比较容易想到的解法就是枚举+暴力，就是从第一个元素开始累加，如果累加和与<code>target</code>相等则把和清零，换到下一个元素作为起始值累计，由于累加的元素至少要有2个，而且和不会超过<code>target</code>，所以只需要枚举到中间位置<code>target/2+1</code>即可。</p>
+<blockquote>
+<p>时间复杂度:O(n$\sqrt{n}$)&emsp;空间复杂度:O(1)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>, mid = target / <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= mid; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= mid; j++) &#123;</span><br><span class="line">                sum += j;</span><br><span class="line">                <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                    <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[j - i + <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= j; k++) &#123;</span><br><span class="line">                        arr[k - i] = k;</span><br><span class="line">                    &#125;</span><br><span class="line">                    res.add(arr);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    sum = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success">
+            <p>执行用时：8 ms, 在所有 Java 提交中击败了13.15%的用户<br>内存消耗：36.5 MB, 在所有 Java 提交中击败了78.21%的用户</p>
+          </div>
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>因为是求连续的元素和，可以借助求和公式简化运算，使用双指针根据条件判断向右移动，在解法一的基础之上，更加充分的利用已知信息来优化时间效率，当区间<code>[left,right]</code>累加和为<code>target</code>的时侯，必然有<code>[left+1,right]</code>累加和小于<code>target</code>，这种情况下就可以直接把<code>right</code>后移一位，从而避免重复计算。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(1)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> left = <span class="number">1</span>, right = <span class="number">2</span>; left &lt; right; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = (right + left) * (right - left + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                    arr[i] = left + i;</span><br><span class="line">                &#125;</span><br><span class="line">                res.add(arr);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                right++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success">
+            <p>执行用时：4 ms, 在所有 Java 提交中击败了58.34%的用户<br>内存消耗：36.4 MB, 在所有 Java 提交中击败了90.87%的用户</p>
+          </div>
+<h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>借助滑动窗口的思想，当累加和小于<code>target</code>的时侯，右窗口扩大1位，当累加和大于<code>target</code>的时侯，左窗口缩小1位，窗口滑动的最大距离为<code>target/2+1</code>，求和的过程只用到了简单运算，相较于解法二，解法三在时间效率上得到了更进一步的提升。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(1)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>, right = <span class="number">2</span>, sum = <span class="number">3</span>, limit = (target &gt;&gt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (left &lt; limit) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                right++;</span><br><span class="line">                sum += right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                    <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                        arr[i] = left + i;</span><br><span class="line">                    &#125;</span><br><span class="line">                    res.add(arr);</span><br><span class="line">                &#125;</span><br><span class="line">                sum -= left;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success">
+            <p>执行用时：2 ms, 在所有 Java 提交中击败了97.59%的用户<br>内存消耗：36.8 MB, 在所有 Java 提交中击败了15.95%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Array</tag>
+        <tag>Easy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组中重复的数字</title>
+    <url>/posts/2021/038f265477/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>找出数组中重复的数字。</p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">输出：2 或 3 </span><br></pre></td></tr></table></figure></p>
+<p>限制：<br><code>2 &lt;= n &lt;= 100000</code></p>
+<span id="more"></span>
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>用一个大小相等的数组<code>array</code>记录下标为<code>num</code>的元素重复次数，如果重复次数大于1，则该元素为重复元素，就是需要返回的结果。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(n)<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[num] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                array[num]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了83.55%的用户<br>内存消耗：46 MB, 在所有 Java 提交中击败了84.31%的用户</p>
+          </div></p>
+</blockquote>
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>与解法一类似，把数组换成Hash表，添加元素的时候判断Hash表中是否已经存在该元素，如果存在，就把当前元素返回。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(n)<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!set.add(num)) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><div class="note success">
+            <p>执行用时：5 ms, 在所有 Java 提交中击败了47.78%的用户<br>内存消耗：48.3 MB, 在所有 Java 提交中击败了15.04%的用户</p>
+          </div></p>
+</blockquote>
+<h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>解法一和解法二的空间复杂度都为<code>O(n)</code>，不能继续优化，我们可以换一种处理方式，同样是遍历数组，由于数组中元素范围是在<code>0～n-1</code>，没有重复元素的时候，每个元素在数组中的位置都是唯一的，通过把数组元素的值交换到值所对应的数组下标位置，我们只需要一个临时变量<code>temp</code>就能完成交换过程，如果要交换的两个元素值相等，那么存在重复元素，把当前元素返回。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(1)<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (nums[i] != i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] == nums[nums[i]]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">                temp = nums[i];</span><br><span class="line">                nums[i] = nums[temp];</span><br><span class="line">                nums[temp] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：46.1 MB, 在所有 Java 提交中击败了72.16%的用户</p>
+          </div></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Array</tag>
+        <tag>Easy</tag>
+        <tag>Hash Table</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序</title>
     <url>/posts/2021/03334513da/</url>
     <content><![CDATA[<h4 id="起点"><a href="#起点" class="headerlink" title="起点"></a>起点</h4><p>我到现在都还记得当年高考填报志愿的时候，面对一堆陌生的专业，一开始不知道怎么选择，后来回忆起电影《<a href="https://baike.baidu.com/item/%E9%92%A2%E9%93%81%E4%BE%A0/1918968">钢铁侠</a>》里 J.A.R.V.I.S. 出现的片段，真的很酷，当时就想要是我也能搞出来这么个东西，那就太方便了，于是带着期望选择了软件工程专业。到了学校，开始上课，对计算机有了更多的了解，才意识到，我目前学的东西还是太基础，离自己打造人工智能的管家还比较遥远。不过到现在来看，已经有越来越多的AI应用落地了，也确实在一定程度上给人们的生活带来了便利。就这样，我进入了计算机行业，然后开始接触编程和程序设计，看着自己写的程序能跑起来，能处理一些简单的任务，再到接触一些大的项目，有团队合作，任务分工，参与到大的项目中完善和维护系统，自己对于系统开发设计也有了更深刻的认识。</p>
 <span id="more"></span>
-
 <p>目前我已经结束了一段接近3年的工作，工作中遇到过不少问题，也解决了不少问题，不过缺少对问题的总结记录和整理，虽说下次遇到同样的问题能够更快的解决，但是时间久了处理起来也还是会生疏。及时记录问题，贡献解决方案对个人和行业来说都是非常有益的事情，所以这一次，我选择了搭建个人博客来做这件事情，到现在博客基本搭建完成，我可以专注于内容本身了。前前后后花了快1个月的时间，做了各种尝试和取舍，把自己喜欢和觉得有意思的元素都融合到了一起，从0到1的这个过程，还挺满意和享受的，之后也会出几篇博客搭建的内容。</p>
 <h4 id="学习探索"><a href="#学习探索" class="headerlink" title="学习探索"></a>学习探索</h4><p>对于计算机行业来说，技术发展和变化节奏都比较快，所以对于从业人员的学习能力有比较高的要求，我在学习上做过一些探索和研究，有一些小小的心得体会，愿意和大家分享，也欢迎大家和我分享交流自己的学习心得。</p>
 <h5 id="主动学习"><a href="#主动学习" class="headerlink" title="主动学习"></a>主动学习</h5><p><a href="https://baike.baidu.com/item/%E5%AD%A6%E4%B9%A0%E9%87%91%E5%AD%97%E5%A1%94">学习金字塔</a>以学习内容平均留存率为衡量指标，比对了主动学习和被动学习的学习效果，整体上来说，主动学习的效果更好，知识留存率更高。主动学习分为三种类型：讨论、实践、教会别人，这三种类型的学习效果依次增加。所以我们在自己的学习过程中，可以适当的应用这三种方式来提高学习效果，比如和同事朋友一起交流讨论一个问题，自己把一些示例代码敲一敲，调试一下，运行一下，修改运行一下，看看结果是不是符合自己的预期，当然也可以把一些好的开源项目克隆到本地运行调试一下，这个过程就能学到不少东西。主动学习的最高境界就是自己当老师，把自己学到的东西分享给周围的人，把内容讲清楚，讲明白，写博客就是一种非常不错的方式，不仅能记录下自己的思考和想法，还能把一些有价值的好玩儿的想法分享出去，这个过程就能加深你对知识本身的理解和应用。</p>
@@ -44,54 +123,6 @@
       </categories>
       <tags>
         <tag>探索</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组中重复的数字</title>
-    <url>/posts/2021/038f265477/</url>
-    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>找出数组中重复的数字。</p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">输出：2 或 3 </span><br></pre></td></tr></table></figure>
-
-<p>限制：<br><code>2 &lt;= n &lt;= 100000</code></p>
-<span id="more"></span>
-
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/">Leetcode</a></p>
-<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>用一个大小相等的数组<code>array</code>记录下标为<code>num</code>的元素重复次数，如果重复次数大于1，则该元素为重复元素，就是需要返回的结果。</p>
-<blockquote>
-<p>时间复杂度:O(n)&emsp;空间复杂度:O(n)</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[num] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                array[num]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="note success">
-            <p>执行用时：1 ms, 在所有 Java 提交中击败了83.55%的用户<br>内存消耗：46 MB, 在所有 Java 提交中击败了84.31%的用户</p>
-          </div>
-
-<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>与解法一类似，把数组换成Hash表，添加元素的时候判断Hash表中是否已经存在该元素，如果存在，就把当前元素返回。</p>
-<blockquote>
-<p>时间复杂度:O(n)&emsp;空间复杂度:O(n)</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!set.add(num)) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="note success">
-            <p>执行用时：5 ms, 在所有 Java 提交中击败了47.78%的用户<br>内存消耗：48.3 MB, 在所有 Java 提交中击败了15.04%的用户</p>
-          </div>
-
-<h5 id="最优解"><a href="#最优解" class="headerlink" title="最优解"></a>最优解</h5><p>解法一和解法二的空间复杂度都为<code>O(n)</code>，不能继续优化，我们可以换一种处理方式，同样是遍历数组，由于数组中元素范围是在<code>0～n-1</code>，没有重复元素的时候，每个元素在数组中的位置都是唯一的，通过把数组元素的值交换到值所对应的数组下标位置，我们只需要一个临时变量<code>temp</code>就能完成交换过程，如果要交换的两个元素值相等，那么存在重复元素，把当前元素返回。</p>
-<blockquote>
-<p>时间复杂度:O(n)&emsp;空间复杂度:O(1)</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (nums[i] != i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] == nums[nums[i]]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">                temp = nums[i];</span><br><span class="line">                nums[i] = nums[temp];</span><br><span class="line">                nums[temp] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="note success">
-            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：46.1 MB, 在所有 Java 提交中击败了72.16%的用户</p>
-          </div>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
-        <tag>Array</tag>
-        <tag>Hash Table</tag>
       </tags>
   </entry>
 </search>
