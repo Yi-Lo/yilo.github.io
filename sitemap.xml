@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yilo.top/posts/2021/038f265477/</loc>
+    <loc>https://yilo.top/posts/2021/031c9c196c/</loc>
+    
+    <lastmod>2021-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/404/index.html</loc>
     
     <lastmod>2021-03-19</lastmod>
     
@@ -10,6 +17,13 @@
   
   <url>
     <loc>https://yilo.top/posts/2021/03ba44daea/</loc>
+    
+    <lastmod>2021-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/posts/2021/038f265477/</loc>
     
     <lastmod>2021-03-19</lastmod>
     
@@ -26,13 +40,6 @@
     <loc>https://yilo.top/posts/2021/03334513da/</loc>
     
     <lastmod>2021-03-17</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/404/index.html</loc>
-    
-    <lastmod>2021-03-16</lastmod>
     
   </url>
   
@@ -82,6 +89,20 @@
   
   <url>
     <loc>https://yilo.top/tags/Array/</loc>
+    <lastmod>2021-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Two-Pointers/</loc>
+    <lastmod>2021-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Linked-List/</loc>
     <lastmod>2021-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
