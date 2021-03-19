@@ -75,6 +75,16 @@
 
 <div class="note success">
             <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：39 MB, 在所有 Java 提交中击败了66.36%的用户</p>
+          </div>
+
+<h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>除了使用栈，我们还可以尝试用递归的方式处理，本质上递归是调用系统的堆栈，和栈原理是一致的，不过还需要借助辅助的函数和变量。</p>
+<blockquote>
+<p>时间复杂度:O(n)&emsp;空间复杂度:O(n)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> idx;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] res;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] reversePrint(ListNode head) &#123;</span><br><span class="line">        recursive(head, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recursive</span><span class="params">(ListNode head, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            res = <span class="keyword">new</span> <span class="keyword">int</span>[count];</span><br><span class="line">            idx = count - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        recursive(head.next, count + <span class="number">1</span>);</span><br><span class="line">        res[idx - count] = head.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了72.23%的用户<br>内存消耗：39.8 MB, 在所有 Java 提交中击败了12.01%的用户</p>
           </div>]]></content>
       <categories>
         <category>算法</category>
@@ -112,8 +122,8 @@
       <tags>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>Two Pointers</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
