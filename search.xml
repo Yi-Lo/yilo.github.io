@@ -47,6 +47,105 @@
       </tags>
   </entry>
   <entry>
+    <title>0～n-1中缺失的数字</title>
+    <url>/posts/2021/0328c29680/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [0,1,3]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [0,1,2,3,4,5,6,7,9]</span><br><span class="line">输出: 8</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong><br><code>1 &lt;= 数组长度 &lt;= 10000</code></p>
+<span id="more"></span>
+
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>直接遍历，如果数组元素值与其对应的下标值不一致，缺失的数字就是下标值，否则缺失的就是数字中的最大值。</p>
+<blockquote>
+<p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.9 MB, 在所有 Java 提交中击败了64.01%的用户</p>
+          </div>
+
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a ^ a &#x3D; 0; &#x2F;&#x2F; 相同的两个数异或值为0</span><br><span class="line">a ^ 0 &#x3D; a; &#x2F;&#x2F; 一个数与0异或值为自身</span><br><span class="line">a ^ b ^ c &#x3D; a ^ c ^ b; &#x2F;&#x2F; 异或具有交换律</span><br></pre></td></tr></table></figure>
+<p>位运算，根据异或的性质，我们很容易使用异或运算找出两组数中缺失的元素。</p>
+<blockquote>
+<p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> miss = nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            miss ^= i;</span><br><span class="line">            miss ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> miss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.8 MB, 在所有 Java 提交中击败了80.73%的用户</p>
+          </div>
+
+<h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>二分查找，定义左端点<code>left</code>，右端点<code>right</code>，中间点<code>mid</code>，如果中间点与其对应的数组元素值相等，说明中间点左侧没有缺失的数字，此时将左端点移动到中间点右侧1位，否则中间点左侧存在缺失的数字，将右端点移动到中间点左侧1位，左端点超过右端点所在位置，查找结束，左端点指向的位置就是缺失的数字。</p>
+<blockquote>
+<p>时间复杂度:$O(\log{}n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (mid == nums[mid]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：39 MB, 在所有 Java 提交中击败了29.96%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Array</tag>
+        <tag>Binary Search</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器人的运动范围</title>
+    <url>/posts/2021/036f7abd/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>地上有一个m行n列的方格，从坐标 <code>[0,0]</code> 到坐标 <code>[m-1,n-1]</code> 。一个机器人从坐标 <code>[0, 0]</code> 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 2, n &#x3D; 3, k &#x3D; 1</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 3, n &#x3D; 1, k &#x3D; 0</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= m,n &lt;= 100</code></li>
+<li><code>0 &lt;= k &lt;= 20</code></li>
+</ul>
+<span id="more"></span>
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>深度优先遍历，机器人从坐标<code>[0, 0]</code>开始移动，搜索的时候只需要向下和向右移动就能走完所有符合条件的格子。机器人能到达的格子数，从整体上来看就是当前所在的格子计为1，加上右边相邻格子能到达的格子总数，加上下边相邻格子能到达的格子总数，依次递归就能得到最终的结果。为了避免重复计算，对于已经走过的格子需要修改访问状态，遇到超出方格范围、已经访问过、限制访问的格子递归返回。</p>
+<blockquote>
+<p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(mn)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span>[][] visit = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        <span class="keyword">return</span> dfs(m, n, k, <span class="number">0</span>, <span class="number">0</span>, visit);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">boolean</span>[][] visit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; <span class="number">0</span> || i &gt;= m || j &lt; <span class="number">0</span> || j &gt;= n || visit[i][j] || forbid(i, j, k)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + dfs(m, n, k, i + <span class="number">1</span>, j, visit) + dfs(m, n, k, i, j + <span class="number">1</span>, visit);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">forbid</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt; <span class="number">0</span> || j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            sum += i % <span class="number">10</span>;</span><br><span class="line">            sum += j % <span class="number">10</span>;</span><br><span class="line">            i /= <span class="number">10</span>;</span><br><span class="line">            j /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum &gt; k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了85.13%的用户<br>内存消耗：35.3 MB, 在所有 Java 提交中击败了80.07%的用户</p>
+          </div>
+
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>广度优先遍历，借助队列可以通过迭代的方式访问格子，整体思路与解法一类似，但是访问格子的顺序不太一样，同时队列元素的插入与删除会带来额外的时间开销。</p>
+<blockquote>
+<p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(mn)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span>[][] visit = <span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> size = queue.size();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                <span class="keyword">int</span>[] pos = queue.poll();</span><br><span class="line">                <span class="keyword">int</span> r = pos[<span class="number">0</span>], c = pos[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (r &lt; <span class="number">0</span> || r &gt;= m || c &lt; <span class="number">0</span> || c &gt;= n || visit[r][c] || forbid(r, c, k)) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                visit[r][c] = <span class="keyword">true</span>;</span><br><span class="line">                queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;r + <span class="number">1</span>, c&#125;);</span><br><span class="line">                queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;r, c + <span class="number">1</span>&#125;);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">forbid</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt; <span class="number">0</span> || j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            sum += i % <span class="number">10</span>;</span><br><span class="line">            sum += j % <span class="number">10</span>;</span><br><span class="line">            i /= <span class="number">10</span>;</span><br><span class="line">            j /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum &gt; k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：6 ms, 在所有 Java 提交中击败了17.10%的用户<br>内存消耗：37.1 MB, 在所有 Java 提交中击败了13.59%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Array</tag>
+        <tag>Medium</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>调整数组顺序使奇数位于偶数前面</title>
     <url>/posts/2021/03796ae9fd/</url>
     <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p>
@@ -75,9 +174,9 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
-        <tag>Easy</tag>
       </tags>
   </entry>
   <entry>
@@ -111,8 +210,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Array</tag>
         <tag>Easy</tag>
+        <tag>Array</tag>
       </tags>
   </entry>
   <entry>
@@ -460,8 +559,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Medium</tag>
         <tag>Array</tag>
+        <tag>Medium</tag>
         <tag>Two Pointers</tag>
       </tags>
   </entry>
@@ -540,8 +639,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Two Pointers</tag>
         <tag>Easy</tag>
+        <tag>Two Pointers</tag>
         <tag>Linked List</tag>
       </tags>
   </entry>
@@ -592,8 +691,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Array</tag>
         <tag>Easy</tag>
+        <tag>Array</tag>
       </tags>
   </entry>
   <entry>
@@ -639,8 +738,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Array</tag>
         <tag>Easy</tag>
+        <tag>Array</tag>
         <tag>Hash Table</tag>
       </tags>
   </entry>
