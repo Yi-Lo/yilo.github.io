@@ -47,6 +47,86 @@
       </tags>
   </entry>
   <entry>
+    <title>合并两个排序的链表</title>
+    <url>/posts/2021/03faa1cd64/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。<br><strong>示例1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong><br><code>0 &lt;= 链表长度 &lt;= 1000</code></p>
+<span id="more"></span>
+
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>迭代，初始化一个伪头节点<code>prev</code>，和当前节点<code>curr</code>，每次比较两个链表当前值的大小，将<code>curr</code>节点的下一个节点指向两个链表中值较小的节点，再把当前节点和较小值节点向后移动一位。当其中一个链表到达表尾的时侯，如果另一个链表还有剩余节点，则直接把当前节点的下一个节点指向剩余的节点的第一个节点。</p>
+<blockquote>
+<p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        ListNode prev = <span class="keyword">new</span> ListNode(-<span class="number">1</span>), curr = prev;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">                curr.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                curr.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        curr.next = l1 == <span class="keyword">null</span> ? l2 : l1;</span><br><span class="line">        <span class="keyword">return</span> prev.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.66%的用户<br>内存消耗：38 MB, 在所有 Java 提交中击败了99.86%的用户</p>
+          </div>
+
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>递归，有一个链表节点是空节点就返回另一个链表节点，比较两个链表的节点值，把值较小节点的下一个节点指向下一层递归返回的节点，然后返回值较小的节点，递归结束就能得到合并之后的链表。</p>
+<blockquote>
+<p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(m + n)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">        <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line">        <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">            l1.next = mergeTwoLists(l1.next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            l2.next = mergeTwoLists(l1, l2.next);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.66%的用户<br>内存消耗：38.6 MB, 在所有 Java 提交中击败了48.44%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Divide and Conquer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在排序数组中查找数字 I</title>
+    <url>/posts/2021/03af7fb63c/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>统计一个数字在排序数组中出现的次数。<br><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [5,7,7,8,8,10], target &#x3D; 8</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [5,7,7,8,8,10], target &#x3D; 6</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong><br><code>0 &lt;= 数组长度 &lt;= 50000</code></p>
+<span id="more"></span>
+
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>顺序查找，遍历数组统计<code>target</code>出现的次数。</p>
+<blockquote>
+<p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == target) count++;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; target) <span class="keyword">return</span> count;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：41.2 MB, 在所有 Java 提交中击败了77.38%的用户</p>
+          </div>
+
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>二分查找，使用二分先找到<code>target</code>所在的位置，然后往两边扩散，这样能充分利用数组的有序性，也能避免查找目标有多个情况下，查找遗漏的问题。</p>
+<blockquote>
+<p>时间复杂度:$O(\log{}n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">                    <span class="keyword">int</span> l = mid - <span class="number">1</span>, r = mid + <span class="number">1</span>, c = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">while</span> (l &gt;= <span class="number">0</span> &amp;&amp; nums[l--] == target) c++;</span><br><span class="line">                    <span class="keyword">while</span> (r &lt; nums.length &amp;&amp; nums[r++] == target) c++;</span><br><span class="line">                    <span class="keyword">return</span> c;</span><br><span class="line">                &#125;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：41.1 MB, 在所有 Java 提交中击败了94.23%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Array</tag>
+        <tag>Binary Search</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>二叉树的深度</title>
     <url>/posts/2021/03fc8ea05/</url>
     <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。<br>例如：<br>给定二叉树 <code>[3,9,20,null,null,15,7]</code>，</p>
@@ -262,8 +342,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Array</tag>
         <tag>Medium</tag>
+        <tag>Array</tag>
       </tags>
   </entry>
   <entry>
@@ -511,8 +591,8 @@
       <tags>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Heap</tag>
         <tag>Divide and Conquer</tag>
+        <tag>Heap</tag>
       </tags>
   </entry>
   <entry>
@@ -680,8 +760,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Array</tag>
         <tag>Medium</tag>
+        <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
   </entry>
@@ -761,8 +841,8 @@
       <tags>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Two Pointers</tag>
         <tag>Linked List</tag>
+        <tag>Two Pointers</tag>
       </tags>
   </entry>
   <entry>
