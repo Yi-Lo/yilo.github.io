@@ -91,10 +91,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
         <tag>Interview</tag>
+        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -182,9 +182,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Tree</tag>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -225,10 +225,10 @@
       </categories>
       <tags>
         <tag>Depth-first Search</tag>
-        <tag>Backtracking</tag>
-        <tag>String</tag>
-        <tag>Recursion</tag>
         <tag>Interview</tag>
+        <tag>Recursion</tag>
+        <tag>String</tag>
+        <tag>Backtracking</tag>
       </tags>
   </entry>
   <entry>
@@ -345,10 +345,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
+        <tag>LCOF</tag>
+        <tag>Easy</tag>
       </tags>
   </entry>
   <entry>
@@ -390,9 +390,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Tree</tag>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -526,8 +526,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -718,9 +718,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Recursion</tag>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Recursion</tag>
       </tags>
   </entry>
   <entry>
@@ -855,9 +855,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>String</tag>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -904,9 +904,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>String</tag>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -944,8 +944,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1026,8 +1026,8 @@
       <tags>
         <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>Two Pointers</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
