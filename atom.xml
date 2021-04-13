@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-04-12T16:32:29.998Z</updated>
+  <updated>2021-04-13T17:33:10.808Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>有效的字母异位词</title>
+    <link href="https://yilo.top/posts/2021/04b66fe035/"/>
+    <id>https://yilo.top/posts/2021/04b66fe035/</id>
+    <published>2021-04-13T15:32:00.000Z</published>
+    <updated>2021-04-13T17:33:10.808Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</p><p><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;anagram&quot;, t &#x3D; &quot;nagaram&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;rat&quot;, t &#x3D; &quot;car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure><p><strong>说明:</strong><br>你可以假设字符串只包含小写字母。<br><strong>进阶:</strong><br>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/valid-anagram/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>排序，拿到一个字符串，先拆分为字符数组，然后对字符排序，之后重新组合成新的字符串，比较两个新字符串的值是否相等即可。</p><blockquote><p>时间复杂度:$O(n\log{}n)$&emsp;空间复杂度:$O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnagram</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length() != t.length()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span>[] chs = s.toCharArray();</span><br><span class="line">        Arrays.sort(chs);</span><br><span class="line">        s = <span class="keyword">new</span> String(chs);</span><br><span class="line"></span><br><span class="line">        chs = t.toCharArray();</span><br><span class="line">        Arrays.sort(chs);</span><br><span class="line">        t = <span class="keyword">new</span> String(chs);</span><br><span class="line">        <span class="keyword">return</span> s.equals(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：2 ms, 在所有 Java 提交中击败了99.99%的用户<br>内存消耗：38.5 MB, 在所有 Java 提交中击败了86.93%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>哈希表，首先字符范围是只包含小写字母，也就是有26个元素，我们可以使用一个长度为26的数组用来统计每个字符出现的次数，对于字符串 s 来说，拿到一个字符，我们对数组下标对应的值加1，对于字符串 t 来说，拿到一个字符，我们对数组下标对应的值减1。统计完成之后，如果两个字符串是异位词，那么数组中所有元素值都应该是0，如果元素值有不为0的情况，则两个字符串不是异位词。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnagram</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length() != t.length()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] chs = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            chs[s.charAt(i) - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">            chs[t.charAt(i) - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> count : chs) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：5 ms, 在所有 Java 提交中击败了44.43%的用户<br>内存消耗：38.6 MB, 在所有 Java 提交中击败了69.49%的用户</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例 1:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入: s &amp;#x3D; &amp;quot;anagram&amp;quot;, t &amp;#x3D; &amp;quot;nagaram&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出: true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;示例 2:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入: s &amp;#x3D; &amp;quot;rat&amp;quot;, t &amp;#x3D; &amp;quot;car&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出: false&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;说明:&lt;/strong&gt;&lt;br&gt;你可以假设字符串只包含小写字母。&lt;br&gt;&lt;strong&gt;进阶:&lt;/strong&gt;&lt;br&gt;如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
+    
+    <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>字符串中第m个出现n次的字符</title>
+    <link href="https://yilo.top/posts/2021/04f07ec942/"/>
+    <id>https://yilo.top/posts/2021/04f07ec942/</id>
+    <published>2021-04-12T17:17:00.000Z</published>
+    <updated>2021-04-13T17:41:48.666Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个字符串 str ，编写一个函数用来查找字符串中第 m 个出现 n 次的字符。</p><p><strong>示例：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：str&#x3D;“abbcdedbf” m &#x3D; 1 n &#x3D; 3</span><br><span class="line">输出：b</span><br></pre></td></tr></table></figure><p><strong>说明：</strong>  </p><p>你可以假设字符串只包含小写字母。</p><span id="more"></span><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>哈希表，我们使用一个保持元素加入顺序的 <code>LinkedHashMap</code> 来统计每一个字符出现的次数，统计出词频之后遍历哈希表中元素，如果元素出现次数和要查找字符出现次数 n 相等，m 减 1，当 m 值为 0 时所对应的元素就是目标字符，如果遍历完哈希表都没有找到目标字符，则目标字符不存在。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Character <span class="title">search</span><span class="params">(String str, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; dict = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : str.toCharArray()) &#123;</span><br><span class="line">            dict.put(ch, dict.getOrDefault(ch, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : dict.keySet()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dict.get(ch) == n) &#123;</span><br><span class="line">                <span class="keyword">if</span> (--m == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> ch;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>输入：str=“abbcdedbf” m = 2 n = 1<br>输出：c</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;给定一个字符串 str ，编写一个函数用来查找字符串中第 m 个出现 n 次的字符。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：str&amp;#x3D;“abbcdedbf” m &amp;#x3D; 1 n &amp;#x3D; 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：b&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;  &lt;/p&gt;
+&lt;p&gt;你可以假设字符串只包含小写字母。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    
+    <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+  </entry>
   
   <entry>
     <title>二维数组中最大连续1的个数</title>
@@ -39,11 +105,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
-    
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -74,9 +140,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
@@ -143,9 +209,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -181,13 +247,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
-    
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -248,11 +314,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
@@ -292,13 +358,13 @@
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
-    
-    <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
+    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
     
     <category term="String" scheme="https://yilo.top/tags/String/"/>
     
-    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
+    <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
+    
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
   </entry>
   
@@ -384,13 +450,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
   </entry>
   
@@ -420,11 +486,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
@@ -526,9 +592,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -639,70 +705,6 @@
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
     <category term="Design" scheme="https://yilo.top/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>旋转数组的最小数字</title>
-    <link href="https://yilo.top/posts/2021/036e519af2/"/>
-    <id>https://yilo.top/posts/2021/036e519af2/</id>
-    <published>2021-03-22T01:54:00.000Z</published>
-    <updated>2021-03-23T01:59:36.979Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 <code>[3,4,5,1,2]</code> 为 <code>[1,2,3,4,5]</code> 的一个旋转，该数组的最小值为1。  </p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,4,5,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[2,2,2,0,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>顺序查找，通过观察可以发现数组旋转之后，最小元素所在的位置刚好是元素数值递减的第一个位置，所以我们只需要遍历数组找到第一个递减的元素返回即可，如果数组遍历完都没有找到递减的元素，就返回数组的首元素。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minArray</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (numbers[i] &gt; numbers[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">return</span> numbers[i + <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.1 MB, 在所有 Java 提交中击败了90.30%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>二分查找，定义左端点<code>left</code>，右端点<code>right</code>，以及中间点<code>mid</code>，比较中间点和右端点对应数组元素值的大小，我们的目标是要找到最小值。当右端点对应的值更大时，最小值的范围是在中间点的左侧，所以把右端点移动到中间点位置，当中间点对应的值更大时，最小值的范围是在中间点的右侧，所以把左端点移动到中间点的下一个位置，当中间点和右端点对应的值相等时，即数组中的元素重复，此时把右端点左移一位。左右端点相遇的时侯，左端点对应的值就是旋转数组的最小数字。</p><blockquote><p>时间复杂度:$O(\log{}n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minArray</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = numbers.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (numbers[mid] &lt; numbers[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &gt; numbers[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.3 MB, 在所有 Java 提交中击败了46.47%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 &lt;code&gt;[3,4,5,1,2]&lt;/code&gt; 为 &lt;code&gt;[1,2,3,4,5]&lt;/code&gt; 的一个旋转，该数组的最小值为1。  &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：[3,4,5,1,2]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;示例 2：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：[2,2,2,0,1]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
-    <category term="Binary Search" scheme="https://yilo.top/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>斐波那契数列</title>
-    <link href="https://yilo.top/posts/2021/03cc713db/"/>
-    <id>https://yilo.top/posts/2021/03cc713db/</id>
-    <published>2021-03-22T01:48:00.000Z</published>
-    <updated>2021-03-22T03:51:34.013Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>写一个函数，输入 <code>n</code> ，求斐波那契（Fibonacci）数列的第 <code>n</code> 项（即 <code>F(N)</code>）。斐波那契数列的定义如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F(0) &#x3D; 0,   F(1) &#x3D; 1</span><br><span class="line">F(N) &#x3D; F(N - 1) + F(N - 2), 其中 N &gt; 1.</span><br></pre></td></tr></table></figure><p>斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。<br>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 2</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 5</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure><p><strong>提示：</strong><br><code>0 &lt;= n &lt;= 100</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>由递推公式，我们很容易写出求解数列第<code>n</code>项的递归形式，当<code>n</code>比较小的时侯可以直接得到结果，但是递归求解的时间复杂度是指数级别的，随着<code>n</code>的增大，计算所需耗费的时间也是呈指数增长，当<code>n</code>比较大的时侯，不推荐使用递归求解。</p><blockquote><p>时间复杂度:$O(2^n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">return</span> (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)) % <span class="number">1000000007</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note danger">            <p>超出时间限制，最后执行的输入：43</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>从斐波那契数列的定义出发，我们可以使用迭代法求解数列的第<code>n</code>项。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">            c = a + b;</span><br><span class="line">            c %= <span class="number">1000000007</span>;</span><br><span class="line">            a = b;</span><br><span class="line">            b = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：35.1 MB, 在所有 Java 提交中击败了88.73%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;写一个函数，输入 &lt;code&gt;n&lt;/code&gt; ，求斐波那契（Fibonacci）数列的第 &lt;code&gt;n&lt;/code&gt; 项（即 &lt;code&gt;F(N)&lt;/code&gt;）。斐波那契数列的定义如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;F(0) &amp;#x3D; 0,   F(1) &amp;#x3D; 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;F(N) &amp;#x3D; F(N - 1) + F(N - 2), 其中 N &amp;gt; 1.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。&lt;br&gt;答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：n &amp;#x3D; 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;示例 2：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：n &amp;#x3D; 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;提示：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;0 &amp;lt;= n &amp;lt;= 100&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
   </entry>
   
