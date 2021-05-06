@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-05-05T12:47:41.804Z</updated>
+  <updated>2021-05-06T14:20:22.405Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://yilo.top/posts/2021/0521677569/"/>
     <id>https://yilo.top/posts/2021/0521677569/</id>
     <published>2021-05-05T04:40:00.000Z</published>
-    <updated>2021-05-05T12:47:41.804Z</updated>
+    <updated>2021-05-06T14:20:22.405Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>编写一个程序，找到两个单链表相交的起始节点。</p><p>如下面的两个链表：</p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>在节点 c1 开始相交。</p><p><strong>示例 1：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124838.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,4,5], listB &#x3D; [5,0,1,8,4,5], skipA &#x3D; 2, skipB &#x3D; 3</span><br><span class="line">输出：Reference of the node with value &#x3D; 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 </span><br><span class="line">[5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure><span id="more"></span><p><strong>示例 2：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124851.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1</span><br><span class="line">输出：Reference of the node with value &#x3D; 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 </span><br><span class="line">[3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124905.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 0, listA &#x3D; [2,6,4], listB &#x3D; [1,5], skipA &#x3D; 3, skipB &#x3D; 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 </span><br><span class="line">skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><ul><li>如果两个链表没有交点，返回 <code>null</code>.</li><li>在返回结果后，两个链表仍须保持原有的结构。</li><li>可假定整个链表结构中没有循环。</li><li>程序尽量满足 $O(n) $时间复杂度，且仅用 $O(1) $内存。</li></ul><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>暴力法，从链表 A 出发，把每个节点和链表 B 中的每个节点都比较一下，如果两个节点相等，则两链表相交，且相等的节点就是起始交点。</p><blockquote><p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">while</span> (pA != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pB != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (pA == pB) &#123;</span><br><span class="line">                    <span class="keyword">return</span> pA;</span><br><span class="line">                &#125;</span><br><span class="line">                pB = pB.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pA = pA.next;</span><br><span class="line">            pB = headB;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：789 ms, 在所有 Java 提交中击败了5.01%的用户<br>内存消耗：41 MB, 在所有 Java 提交中击败了91.03%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>哈希表，我们可以先遍历链表 A 中的所有元素，用Set存起来，然后遍历链表 B 中的每一个节点，如果节点在 Set 中，那么这个节点就是两个链表的起始交点。借助哈希表可以降低时间复杂度，但空间复杂度却增加了，这就是典型的空间换时间。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(m)$ 或 $O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode current = headA;</span><br><span class="line">        Set&lt;ListNode&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            set.add(current);</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        current = headB;</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(current)) &#123;</span><br><span class="line">                <span class="keyword">return</span> current;</span><br><span class="line">            &#125;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：8 ms, 在所有 Java 提交中击败了17.73%的用户<br>内存消耗：42.4 MB, 在所有 Java 提交中击败了5.08%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>双指针，如图我们把 <code>a1-a2</code> 的距离记为 <code>a</code>，把 <code>b1-b3</code> 的距离记为 <code>b</code>，把 <code>c1-c3</code> 的距离记为 <code>c</code>。现在初始化两个指针 <code>pA</code>、<code>pB</code> 分别指向链表 A、B，同时出发向后遍历，当链表 A 遍历到链表尾的时候把指针 <code>pA</code> 指向链表 B，同理当链表 B 遍历到链表尾的时候把指针 <code>pB</code> 指向链表 A。当两个指针相遇时，也就是到节点 c1 的位置，<code>pA</code> 走过的距离为 <code>a + c + b</code> ，<code>pB</code> 走过的距离为 <code>b + c + a</code>，很明显 <code>pA</code> 和 <code>pB</code> 走过的距离是相等的，此时 <code>pA</code> 指向的节点就是链表的起始交点。如果两个链表不相交，<code>pA</code>  和 <code>pB</code> 走过的距离同样相等为 <code>a + b</code>，当两个指针相遇时，分别指向链表 A、B 的表尾。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">if</span> (pA == <span class="keyword">null</span> || pB == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">            pA = (pA == <span class="keyword">null</span>) ? headB : pA.next;</span><br><span class="line">            pB = (pB == <span class="keyword">null</span>) ? headA : pB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pA;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：41.1 MB, 在所有 Java 提交中击败了83.04%的用户</p>          </div>]]></content>
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>编写一个程序，找到两个单链表相交的起始节点。</p><p>如下面的两个链表：</p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>在节点 c1 开始相交。</p><p><strong>示例 1：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124838.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,4,5], listB &#x3D; [5,0,1,8,4,5], skipA &#x3D; 2, skipB &#x3D; 3</span><br><span class="line">输出：Reference of the node with value &#x3D; 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 </span><br><span class="line">[5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure><span id="more"></span><p><strong>示例 2：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124851.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1</span><br><span class="line">输出：Reference of the node with value &#x3D; 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 </span><br><span class="line">[3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124905.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 0, listA &#x3D; [2,6,4], listB &#x3D; [1,5], skipA &#x3D; 3, skipB &#x3D; 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 </span><br><span class="line">skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><ul><li>如果两个链表没有交点，返回 <code>null</code>.</li><li>在返回结果后，两个链表仍须保持原有的结构。</li><li>可假定整个链表结构中没有循环。</li><li>程序尽量满足 $O(n) $时间复杂度，且仅用 $O(1) $内存。</li></ul><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>暴力法，从链表 A 出发，把每个节点和链表 B 中的每个节点都比较一下，如果两个节点相等，则两链表相交，且相等的节点就是起始交点。</p><blockquote><p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">while</span> (pA != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pB != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (pA == pB) &#123;</span><br><span class="line">                    <span class="keyword">return</span> pA;</span><br><span class="line">                &#125;</span><br><span class="line">                pB = pB.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pA = pA.next;</span><br><span class="line">            pB = headB;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：789 ms, 在所有 Java 提交中击败了5.01%的用户<br>内存消耗：41 MB, 在所有 Java 提交中击败了91.03%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>哈希表，我们可以先遍历链表 A 中的所有元素，用Set存起来，然后遍历链表 B 中的每一个节点，如果节点在 Set 中，那么这个节点就是两个链表的起始交点。借助哈希表可以降低时间复杂度，但空间复杂度却增加了，这就是典型的空间换时间。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(m)$ 或 $O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode current = headA;</span><br><span class="line">        Set&lt;ListNode&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            set.add(current);</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        current = headB;</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(current)) &#123;</span><br><span class="line">                <span class="keyword">return</span> current;</span><br><span class="line">            &#125;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：8 ms, 在所有 Java 提交中击败了17.73%的用户<br>内存消耗：42.4 MB, 在所有 Java 提交中击败了5.08%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>双指针，如图我们把 <code>a1-a2</code> 的距离记为 <code>a</code>，把 <code>b1-b3</code> 的距离记为 <code>b</code>，把 <code>c1-c3</code> 的距离记为 <code>c</code>。现在初始化两个指针 <code>pA</code>、<code>pB</code> 分别指向链表 A、B，同时出发向后遍历，当链表 A 遍历到链表尾的时候把指针 <code>pA</code> 指向链表 B，同理当链表 B 遍历到链表尾的时候把指针 <code>pB</code> 指向链表 A。当两个指针相遇时，也就是到节点 c1 的位置，<code>pA</code> 走过的距离为 <code>a + c + b</code> ，<code>pB</code> 走过的距离为 <code>b + c + a</code>，很明显 <code>pA</code> 和 <code>pB</code> 走过的距离是相等的，此时 <code>pA</code> 指向的节点就是链表的起始交点。如果两个链表不相交，<code>pA</code>  和 <code>pB</code> 走过的距离同样相等为 <code>a + b</code>，当两个指针相遇时，分别指向链表 B、A 的表尾。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">if</span> (pA == <span class="keyword">null</span> || pB == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">            pA = (pA == <span class="keyword">null</span>) ? headB : pA.next;</span><br><span class="line">            pB = (pB == <span class="keyword">null</span>) ? headA : pB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pA;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：41.1 MB, 在所有 Java 提交中击败了83.04%的用户</p>          </div>]]></content>
     
     
     <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;编写一个程序，找到两个单链表相交的起始节点。&lt;/p&gt;
@@ -41,11 +41,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
-    
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
   </entry>
   
@@ -73,13 +73,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
     
   </entry>
   
@@ -105,13 +105,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
     
   </entry>
   
@@ -138,11 +138,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -173,9 +173,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
@@ -208,9 +208,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
@@ -242,9 +242,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -280,13 +280,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -316,9 +316,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
     
@@ -347,11 +347,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -391,13 +391,13 @@
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
-    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="String" scheme="https://yilo.top/tags/String/"/>
     
     <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
     
   </entry>
   
@@ -421,9 +421,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
@@ -452,9 +452,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -483,13 +483,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
+    
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -519,11 +519,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -555,11 +555,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -587,9 +587,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -625,9 +625,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -658,9 +658,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -695,9 +695,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
