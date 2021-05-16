@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-05-15T04:34:53.784Z</updated>
+  <updated>2021-05-16T11:55:11.107Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树的子结构</title>
+    <link href="https://yilo.top/posts/2021/0553dd15fc/"/>
+    <id>https://yilo.top/posts/2021/0553dd15fc/</id>
+    <published>2021-05-16T08:30:00.000Z</published>
+    <updated>2021-05-16T11:55:11.107Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)<br>B是A的子结构， 即 A中有出现和B相同的结构和节点值。<br>例如:<br>给定的树 A:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     3</span><br><span class="line">    &#x2F; \</span><br><span class="line">   4   5</span><br><span class="line">  &#x2F; \</span><br><span class="line"> 1   2</span><br></pre></td></tr></table></figure><p>给定的树 B：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   4 </span><br><span class="line">  &#x2F;</span><br><span class="line"> 1</span><br></pre></td></tr></table></figure><p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [1,2,3], B &#x3D; [3,1]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [3,4,5,1,2], B &#x3D; [4,1]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>0 &lt;= 节点个数 &lt;= 10000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>深度优先遍历，按照深度优先的方式遍历树A，对A中的每一个节点借助辅助函数 <code>hasSubStructure</code> 判断从该节点出发是否含有子结构B，如果确实存在则返回<code>true</code> ，利用逻辑或的短路性质在传递结果的同时也能避免不必要的递归。</p><blockquote><p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(m)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> result = hasSubStructure(A, B);</span><br><span class="line">        result = result || isSubStructure(A.left, B);</span><br><span class="line">        result = result || isSubStructure(A.right, B);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || A.val != B.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!hasSubStructure(A.left, B.left)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!hasSubStructure(A.right, B.right)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：39.8 MB, 在所有 Java 提交中击败了96.95%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>广度优先遍历，整体思想与解法一相同，但是采用了广度优先遍历的方式，需要借助队列，从理论上来说两种方式的时间空间复杂度是一致的，但是在实际运行中维护队列会带来额外的时间和空间开销，所以解法二实际运行效果不如解法一。</p><blockquote><p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(m)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(A);</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (node.val == B.val &amp;&amp; hasSubStructure(node, B)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasSubStructure</span><span class="params">(TreeNode nodeA, TreeNode nodeB)</span> </span>&#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queueA = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        Queue&lt;TreeNode&gt; queueB = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queueA.add(nodeA);</span><br><span class="line">        queueB.add(nodeB);</span><br><span class="line">        <span class="keyword">while</span> (!queueB.isEmpty()) &#123;</span><br><span class="line">            nodeA = queueA.poll();</span><br><span class="line">            nodeB = queueB.poll();</span><br><span class="line">            <span class="keyword">if</span> (nodeA == <span class="keyword">null</span> || nodeA.val != nodeB.val) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nodeB.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queueA.add(nodeA.left);</span><br><span class="line">                queueB.add(nodeB.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nodeB.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queueA.add(nodeA.right);</span><br><span class="line">                queueB.add(nodeB.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：5 ms, 在所有 Java 提交中击败了5.72%的用户<br>内存消耗：40.8 MB, 在所有 Java 提交中击败了5.12%的用户</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)&lt;br&gt;B是A的子结构， 即 A中有出现和B相同的结构和节点值。&lt;br&gt;例如:&lt;br&gt;给定的树 A:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;     3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#x2F; \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   4   5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#x2F; \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 1   2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;给定的树 B：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;   4 &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#x2F;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：A &amp;#x3D; [1,2,3], B &amp;#x3D; [3,1]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：false&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;示例 2：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：A &amp;#x3D; [3,4,5,1,2], B &amp;#x3D; [4,1]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;0 &amp;lt;= 节点个数 &amp;lt;= 10000&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+  </entry>
   
   <entry>
     <title>数组中数字出现的次数</title>
@@ -109,9 +147,9 @@
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
-    
     <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
+    
+    <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
   </entry>
   
@@ -170,11 +208,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
   </entry>
   
@@ -312,13 +350,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
@@ -421,13 +459,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
+    
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
     
     <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
     
@@ -515,9 +553,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
@@ -589,9 +627,9 @@
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -662,41 +700,6 @@
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>调整数组顺序使奇数位于偶数前面</title>
-    <link href="https://yilo.top/posts/2021/03796ae9fd/"/>
-    <id>https://yilo.top/posts/2021/03796ae9fd/</id>
-    <published>2021-03-23T02:15:00.000Z</published>
-    <updated>2021-03-23T04:04:49.861Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p><p><strong>示例：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4]</span><br><span class="line">输出：[1,3,2,4] </span><br><span class="line">注：[3,1,2,4] 也是正确的答案之一。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ol><li><code>0 &lt;= nums.length &lt;= 50000</code></li><li><code>1 &lt;= nums[i] &lt;= 10000</code></li></ol><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>使用双指针，定义左端点<code>left</code>，右端点<code>right</code>，从数组两端向中间移动，当左端点遇到的值为奇数时，左端点右移，直到值为偶数，同理，当右端点遇到的值为偶数时，右端点左移，直到值为奇数，此时交换左右端点对应的值，左右端点相遇，交换过程结束，数组元素的顺序就是符合要求的结果。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] exchange(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] % <span class="number">2</span> != <span class="number">0</span>) left++;</span><br><span class="line">            <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[right] % <span class="number">2</span> == <span class="number">0</span>) right--;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[left];</span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            nums[right] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：2 ms, 在所有 Java 提交中击败了97.89%的用户<br>内存消耗：46.3 MB, 在所有 Java 提交中击败了70.40%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：nums &amp;#x3D; [1,2,3,4]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[1,3,2,4] &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;注：[3,1,2,4] 也是正确的答案之一。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;提示：&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;0 &amp;lt;= nums.length &amp;lt;= 50000&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;1 &amp;lt;= nums[i] &amp;lt;= 10000&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Array" scheme="https://yilo.top/tags/Array/"/>
-    
-    <category term="Two Pointers" scheme="https://yilo.top/tags/Two-Pointers/"/>
     
   </entry>
   
