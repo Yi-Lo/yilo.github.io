@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-05-17T15:13:42.897Z</updated>
+  <updated>2021-05-29T04:28:17.295Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一个只出现一次的字符</title>
+    <link href="https://yilo.top/posts/2021/0550f3eaff/"/>
+    <id>https://yilo.top/posts/2021/0550f3eaff/</id>
+    <published>2021-05-29T02:58:00.000Z</published>
+    <updated>2021-05-29T04:28:17.295Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。<br><strong>示例:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; &quot;abaccdeff&quot;</span><br><span class="line">返回 &quot;b&quot;</span><br><span class="line"></span><br><span class="line">s &#x3D; &quot;&quot; </span><br><span class="line">返回 &quot; &quot;</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>0 &lt;= s 的长度 &lt;= 50000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>哈希表记录次数，使用一个数组把字符映射成数组下标，数组元素记录字符出现次数，遍历整个字符串就能得到所有字符出现的次数，然后按照原字符串中的顺序找出第一个出现次数是1的字符，如果找不到就返回空格。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chs = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span>[] frequency = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : chs) &#123;</span><br><span class="line">            frequency[ch - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : chs) &#123;</span><br><span class="line">            <span class="keyword">if</span> (frequency[ch - <span class="string">&#x27;a&#x27;</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ch;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：4 ms, 在所有 Java 提交中击败了99.18%的用户<br>内存消耗：38.8 MB, 在所有 Java 提交中击败了60.73%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>哈希表记录位置，使用哈希表记录每个字符出现的位置，如果哈希表的 key 中不包含该字符就把字符和字符位置记录下来，否则字符出现多次，不满足题目要求，把字符的位置修改为 -1。遍历哈希表，找出其中位置不为 -1 的最小值，就是第一个只出现一次字符的所在位置。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">32</span>);</span><br><span class="line">        <span class="keyword">int</span> length = s.length();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(ch)) &#123;</span><br><span class="line">                map.put(ch, -<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(ch, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> first = length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : map.keySet()) &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = map.get(ch);</span><br><span class="line">            <span class="keyword">if</span> (pos != -<span class="number">1</span> &amp;&amp; pos &lt; first) &#123;</span><br><span class="line">                first = pos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> first == length ? <span class="string">&#x27; &#x27;</span> : s.charAt(first);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：27 ms, 在所有 Java 提交中击败了54.80%的用户<br>内存消耗：38.6 MB, 在所有 Java 提交中击败了77.72%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>在解法一的基础上，使用队列在字符遍历过程中将首次出现的字符入队，遍历结束后，队列中的字符依次出队，如果字符统计的次数是1，那么这个字符就是第一个只出现一次的字符，返回即可。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;Character&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] frequency = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = s.charAt(i);</span><br><span class="line">            frequency[ch - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">            <span class="keyword">if</span> (frequency[ch - <span class="string">&#x27;a&#x27;</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">                queue.add(ch);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (frequency[ch - <span class="string">&#x27;a&#x27;</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ch;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：8 ms, 在所有 Java 提交中击败了81.60%的用户<br>内存消耗：38.6 MB, 在所有 Java 提交中击败了83.96%的用户</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。&lt;br&gt;&lt;strong&gt;示例:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;s &amp;#x3D; &amp;quot;abaccdeff&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;返回 &amp;quot;b&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;s &amp;#x3D; &amp;quot;&amp;quot; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;返回 &amp;quot; &amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;0 &amp;lt;= s 的长度 &amp;lt;= 50000&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+  </entry>
   
   <entry>
     <title>从上到下打印二叉树 II</title>
@@ -40,9 +68,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
@@ -80,9 +108,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
@@ -242,11 +270,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
   </entry>
   
@@ -384,13 +412,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
@@ -451,9 +479,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
@@ -493,9 +521,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
-    
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="String" scheme="https://yilo.top/tags/String/"/>
     
@@ -587,11 +615,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
@@ -623,9 +651,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
@@ -664,40 +692,6 @@
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0～n-1中缺失的数字</title>
-    <link href="https://yilo.top/posts/2021/0328c29680/"/>
-    <id>https://yilo.top/posts/2021/0328c29680/</id>
-    <published>2021-03-24T02:25:00.000Z</published>
-    <updated>2021-03-25T08:07:04.322Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。</p><p><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,3]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,2,3,4,5,6,7,9]</span><br><span class="line">输出: 8</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>1 &lt;= 数组长度 &lt;= 10000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>直接遍历，如果数组元素值与其对应的下标值不一致，缺失的数字就是下标值，否则缺失的就是数字中的最大值。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.9 MB, 在所有 Java 提交中击败了64.01%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a ^ a &#x3D; 0; &#x2F;&#x2F; 相同的两个数异或值为0</span><br><span class="line">a ^ 0 &#x3D; a; &#x2F;&#x2F; 一个数与0异或值为自身</span><br><span class="line">a ^ b ^ c &#x3D; a ^ c ^ b; &#x2F;&#x2F; 异或具有交换律</span><br></pre></td></tr></table></figure><p>位运算，根据异或的性质，我们很容易使用异或运算找出两组数中缺失的元素。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> miss = nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            miss ^= i;</span><br><span class="line">            miss ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> miss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.8 MB, 在所有 Java 提交中击败了80.73%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><p>二分查找，定义左端点<code>left</code>，右端点<code>right</code>，中间点<code>mid</code>，如果中间点与其对应的数组元素值相等，说明中间点左侧没有缺失的数字，此时将左端点移动到中间点右侧1位，否则中间点左侧存在缺失的数字，将右端点移动到中间点左侧1位，左端点超过右端点所在位置，查找结束，左端点指向的位置就是缺失的数字。</p><blockquote><p>时间复杂度:$O(\log{}n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (mid == nums[mid]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：39 MB, 在所有 Java 提交中击败了29.96%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;示例 1:&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入: [0,1,3]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出: 2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;示例 2:&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入: [0,1,2,3,4,5,6,7,9]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出: 8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;1 &amp;lt;= 数组长度 &amp;lt;= 10000&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Array" scheme="https://yilo.top/tags/Array/"/>
-    
-    <category term="Binary Search" scheme="https://yilo.top/tags/Binary-Search/"/>
     
   </entry>
   
