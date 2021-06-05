@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-05-30T08:26:40.704Z</updated>
+  <updated>2021-06-05T09:23:41.999Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数组中出现次数超过一半的数字</title>
+    <link href="https://yilo.top/posts/2021/06a01a37fb/"/>
+    <id>https://yilo.top/posts/2021/06a01a37fb/</id>
+    <published>2021-06-05T06:28:00.000Z</published>
+    <updated>2021-06-05T09:23:41.999Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。<br>你可以假设数组是非空的，并且给定的数组总是存在多数元素。<br><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>1 &lt;= 数组长度 &lt;= 50000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>哈希表统计，遍历数组统计每个元素出现的次数，然后从哈希表中找出 val 最大的 key 就是所需结果。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            map.put(num, map.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> majority = -<span class="number">1</span>, maxcount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer key : map.keySet()) &#123;</span><br><span class="line">            <span class="keyword">int</span> val = map.get(key);</span><br><span class="line">            <span class="keyword">if</span> (val &gt; maxcount) &#123;</span><br><span class="line">                maxcount = val;</span><br><span class="line">                majority = key;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> majority;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="简化版"><a href="#简化版" class="headerlink" title="简化版"></a>简化版</h5><p>题目要求是找出数组中出现次数超过数组长度一半的数字，我们可以直接在遍历统计过程中判断一个元素出现的次数是否已经超过数组长度的一半，如果是就直接返回当前结果，这样能在一些情况下能够提前返回结果，而不用遍历整个数组，同时也能使代码得到简化。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> limit = nums.length &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">int</span> count = map.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; limit) <span class="keyword">return</span> num;</span><br><span class="line">            map.put(num, count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：13 ms, 在所有 Java 提交中击败了26.95%的用户<br>内存消耗：43.6 MB, 在所有 Java 提交中击败了31.77%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>数组排序，数组中一个元素出现次数如果超过数组长度的一半，那么在数组有序的情况下，数组中间值一定就是这个元素。</p><blockquote><p>时间复杂度:$O(n\log{}n)$&emsp;空间复杂度:$O(\log{}n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">return</span> nums[nums.length / <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：2 ms, 在所有 Java 提交中击败了60.67%的用户<br>内存消耗：44.5 MB, 在所有 Java 提交中击败了5.00%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210605170502.png" style="zoom:67%;"/></div><p><a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%95%B0%E6%8A%95%E7%A5%A8%E7%AE%97%E6%B3%95">摩尔投票法</a>，核心思想是在一组元素中，如果有元素数量上占优势，也就是超过元素总数的一半，此时所有元素可以被分为两类，我们把数量占优势的元素记为 A，把其他的元素记为 B，对于 A 类元素而言，在所有元素中数量最多，且 A 类中的元素也全部相同，对于 B 类元素而言，在所有元素中数量相对较少，且 B 类中的元素可能相同也可能不同。在这种情况下，我们用一个 A 类元素抵消掉一个 B 类元素，很明显，B 类元素会首先被消耗完，剩下的元素就都是 A 类元素。从算法实现上来说，一开始不知道那个元素是 A 类元素，那个元素是 B 类元素，所以先选定一个候选者 <code>candidate</code> 然后对候选者进行投票，如果当前元素和候选者相同，票数加1，否则票数减1，一个候选者得票为0时，将被下一个候选者替换，最终剩下的候选者就是出现次数最多的元素。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>, candidate = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">                candidate = num;</span><br><span class="line">            &#125;</span><br><span class="line">            count += (num == candidate) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.95%的用户<br>内存消耗：41.7 MB, 在所有 Java 提交中击败了68.26%的用户</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。&lt;br&gt;你可以假设数组是非空的，并且给定的数组总是存在多数元素。&lt;br&gt;&lt;strong&gt;示例 1:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出: 2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;1 &amp;lt;= 数组长度 &amp;lt;= 50000&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+    <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
+    
+    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的最近公共祖先</title>
@@ -48,11 +78,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -76,11 +106,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -108,11 +138,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Breadth-first Search" scheme="https://yilo.top/tags/Breadth-first-Search/"/>
     
@@ -148,11 +178,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -180,9 +210,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -193,7 +223,7 @@
     <link href="https://yilo.top/posts/2021/0521677569/"/>
     <id>https://yilo.top/posts/2021/0521677569/</id>
     <published>2021-05-05T04:40:00.000Z</published>
-    <updated>2021-05-30T07:28:14.192Z</updated>
+    <updated>2021-06-05T08:56:46.042Z</updated>
     
     <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>编写一个程序，找到两个单链表相交的起始节点。</p><p>如下面的两个链表：</p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>在节点 c1 开始相交。</p><p><strong>示例 1：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124838.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,4,5], listB &#x3D; [5,0,1,8,4,5], skipA &#x3D; 2, skipB &#x3D; 3</span><br><span class="line">输出：Reference of the node with value &#x3D; 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 </span><br><span class="line">[5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure><span id="more"></span><p><strong>示例 2：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124851.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1</span><br><span class="line">输出：Reference of the node with value &#x3D; 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 </span><br><span class="line">[3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124905.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 0, listA &#x3D; [2,6,4], listB &#x3D; [1,5], skipA &#x3D; 3, skipB &#x3D; 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 </span><br><span class="line">skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><ul><li>如果两个链表没有交点，返回 <code>null</code>.</li><li>在返回结果后，两个链表仍须保持原有的结构。</li><li>可假定整个链表结构中没有循环。</li><li>程序尽量满足 $O(n) $时间复杂度，且仅用 $O(1) $内存。</li></ul><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>暴力法，从链表 A 出发，把每个节点和链表 B 中的每个节点都比较一下，如果两个节点相等，则两链表相交，且相等的节点就是起始交点。</p><blockquote><p>时间复杂度:$O(mn)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">while</span> (pA != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pB != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (pA == pB) &#123;</span><br><span class="line">                    <span class="keyword">return</span> pA;</span><br><span class="line">                &#125;</span><br><span class="line">                pB = pB.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pA = pA.next;</span><br><span class="line">            pB = headB;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：789 ms, 在所有 Java 提交中击败了5.01%的用户<br>内存消耗：41 MB, 在所有 Java 提交中击败了91.03%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>哈希表，我们可以先遍历链表 A 中的所有元素，用Set存起来，然后遍历链表 B 中的每一个节点，如果节点在 Set 中，那么这个节点就是两个链表的起始交点。借助哈希表可以降低时间复杂度，但空间复杂度却增加了，这就是典型的空间换时间。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(m)$ 或 $O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode current = headA;</span><br><span class="line">        Set&lt;ListNode&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            set.add(current);</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        current = headB;</span><br><span class="line">        <span class="keyword">while</span> (current != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(current)) &#123;</span><br><span class="line">                <span class="keyword">return</span> current;</span><br><span class="line">            &#125;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：8 ms, 在所有 Java 提交中击败了17.73%的用户<br>内存消耗：42.4 MB, 在所有 Java 提交中击败了5.08%的用户</p>          </div><h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210505124817.png" style="zoom: 67%;" /></div><p>双指针，如图我们把 <code>a1-a2</code> 的距离记为 <code>a</code>，把 <code>b1-b3</code> 的距离记为 <code>b</code>，把 <code>c1-c3</code> 的距离记为 <code>c</code>。现在初始化两个指针 <code>pA</code>、<code>pB</code> 分别指向链表 A、B，同时出发向后遍历，当链表 A 遍历到链表尾的时候把指针 <code>pA</code> 指向链表 B，同理当链表 B 遍历到链表尾的时候把指针 <code>pB</code> 指向链表 A。当两个指针相遇时，也就是到节点 c1 的位置，<code>pA</code> 走过的距离为 <code>a + c + b</code> ，<code>pB</code> 走过的距离为 <code>b + c + a</code>，很明显 <code>pA</code> 和 <code>pB</code> 走过的距离是相等的，此时 <code>pA</code> 指向的节点就是链表的起始交点。如果两个链表不相交，<code>pA</code>  和 <code>pB</code> 走过的距离同样相等为 <code>a + b</code>，当两个指针相遇时，分别指向链表 B、A 的表尾。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        ListNode pA = headA, pB = headB;</span><br><span class="line">        <span class="keyword">if</span> (pA == <span class="keyword">null</span> || pB == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">            pA = (pA == <span class="keyword">null</span>) ? headB : pA.next;</span><br><span class="line">            pB = (pB == <span class="keyword">null</span>) ? headA : pB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pA;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：41.1 MB, 在所有 Java 提交中击败了83.04%的用户</p>          </div>]]></content>
     
@@ -213,11 +243,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
-    
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
   </entry>
   
@@ -245,13 +275,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
-    
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
   </entry>
   
@@ -277,13 +307,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
     
   </entry>
   
@@ -310,11 +340,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -345,9 +375,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
@@ -380,9 +410,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
@@ -414,9 +444,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -453,13 +483,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -489,9 +519,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
     
@@ -520,11 +550,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -533,7 +563,7 @@
     <link href="https://yilo.top/posts/2021/03a433fb66/"/>
     <id>https://yilo.top/posts/2021/03a433fb66/</id>
     <published>2021-03-29T06:57:00.000Z</published>
-    <updated>2021-05-09T09:37:48.999Z</updated>
+    <updated>2021-06-05T09:11:09.928Z</updated>
     
     <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p><p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210408150904.png" style="zoom:67%;"/></div><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;23&quot;</span><br><span class="line">输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;&quot;</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;2&quot;</span><br><span class="line">输出：[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>0 &lt;= digits.length &lt;= 4</code></li><li><code>digits[i]</code> 是范围<code> [&#39;2&#39;, &#39;9&#39;]</code> 的一个数字。</li></ul><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>递归+回溯，先构建数字和字母的对应关系，从字符串首个数字出发，获取数字对应的英文字母串，从字母串首个字母开始，拼接字符，递归处理字符串下一个数字，处理完之后，回溯，删除当前拼接的字符，当字符串索引值与其长度相等的时候，拼接得到的新字符串就是符合要求的一种情况，把它添加到结果列表中，跳出递归，整个递归结束就能得到所有字母组合的结果。</p><blockquote><p>时间复杂度:$O(3^m \times 4^n)$&emsp;空间复杂度:$O(m + n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String nums = <span class="string">&quot;23456789&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> Map&lt;Character, String&gt; dict = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> String[] words = &#123;<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;def&quot;</span>, <span class="string">&quot;ghi&quot;</span>, <span class="string">&quot;jkl&quot;</span>, <span class="string">&quot;mno&quot;</span>, <span class="string">&quot;pqrs&quot;</span>, <span class="string">&quot;tuv&quot;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">letterCombinations</span><span class="params">(String digits)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (digits == <span class="keyword">null</span> || digits.isEmpty()) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length(); i++) &#123;</span><br><span class="line">            dict.put(nums.charAt(i), words[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(digits, <span class="number">0</span>, <span class="keyword">new</span> StringBuilder());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(String digits, <span class="keyword">int</span> index, StringBuilder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index == digits.length()) &#123;</span><br><span class="line">            res.add(builder.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String word = dict.get(digits.charAt(index));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); i++) &#123;</span><br><span class="line">            builder.append(word.charAt(i));</span><br><span class="line">            dfs(digits, index + <span class="number">1</span>, builder);</span><br><span class="line">            builder.deleteCharAt(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了83.34%的用户<br>内存消耗：37 MB, 在所有 Java 提交中击败了81.79%的用户</p>          </div>]]></content>
     
@@ -564,13 +594,13 @@
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
-    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
-    
-    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    
+    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
     
   </entry>
   
@@ -594,9 +624,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
@@ -625,9 +655,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -656,47 +686,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
-  </entry>
-  
-  <entry>
-    <title>二叉树的镜像</title>
-    <link href="https://yilo.top/posts/2021/035bf14681/"/>
-    <id>https://yilo.top/posts/2021/035bf14681/</id>
-    <published>2021-03-26T03:23:00.000Z</published>
-    <updated>2021-03-26T10:26:03.210Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。<br>例如输入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   &#x2F;   \</span><br><span class="line">  2     7</span><br><span class="line"> &#x2F; \   &#x2F; \</span><br><span class="line">1   3 6   9</span><br></pre></td></tr></table></figure><p>镜像输出：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   &#x2F;   \</span><br><span class="line">  7     2</span><br><span class="line"> &#x2F; \   &#x2F; \</span><br><span class="line">9   6 3   1</span><br></pre></td></tr></table></figure><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [4,2,7,1,3,6,9]</span><br><span class="line">输出：[4,7,2,9,6,3,1]</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>0 &lt;= 节点个数 &lt;= 1000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>直接递归，递归过程中交换左右子树的位置，当根节点为空时，递归返回。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode node = mirrorTree(root.left);</span><br><span class="line">        root.left = mirrorTree(root.right);</span><br><span class="line">        root.right = node;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：35.7 MB, 在所有 Java 提交中击败了86.90%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>使用队列，队列初始化后加入根节点，当队列不为空时，取出一个节点，交换左右子树的位置，把非空的左右子树加入到队列中，队列中无剩余节点，返回根节点即可。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        LinkedList&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.poll();</span><br><span class="line">            TreeNode temp = node.left;</span><br><span class="line">            node.left = node.right;</span><br><span class="line">            node.right = temp;</span><br><span class="line">            <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：35.8 MB, 在所有 Java 提交中击败了52.60%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;请完成一个函数，输入一个二叉树，该函数输出它的镜像。&lt;br&gt;例如输入：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;     4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#x2F;   \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  2     7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#x2F; \   &amp;#x2F; \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1   3 6   9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;镜像输出：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;     4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#x2F;   \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  7     2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#x2F; \   &amp;#x2F; \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9   6 3   1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：root &amp;#x3D; [4,2,7,1,3,6,9]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[4,7,2,9,6,3,1]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;0 &amp;lt;= 节点个数 &amp;lt;= 1000&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   

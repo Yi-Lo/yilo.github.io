@@ -47,6 +47,59 @@
       </tags>
   </entry>
   <entry>
+    <title>数组中出现次数超过一半的数字</title>
+    <url>/posts/2021/06a01a37fb/</url>
+    <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。<br>你可以假设数组是非空的，并且给定的数组总是存在多数元素。<br><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong><br><code>1 &lt;= 数组长度 &lt;= 50000</code></p>
+<span id="more"></span>
+
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">Leetcode</a></p>
+<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>哈希表统计，遍历数组统计每个元素出现的次数，然后从哈希表中找出 val 最大的 key 就是所需结果。</p>
+<blockquote>
+<p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(n)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            map.put(num, map.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> majority = -<span class="number">1</span>, maxcount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer key : map.keySet()) &#123;</span><br><span class="line">            <span class="keyword">int</span> val = map.get(key);</span><br><span class="line">            <span class="keyword">if</span> (val &gt; maxcount) &#123;</span><br><span class="line">                maxcount = val;</span><br><span class="line">                majority = key;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> majority;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="简化版"><a href="#简化版" class="headerlink" title="简化版"></a>简化版</h5><p>题目要求是找出数组中出现次数超过数组长度一半的数字，我们可以直接在遍历统计过程中判断一个元素出现的次数是否已经超过数组长度的一半，如果是就直接返回当前结果，这样能在一些情况下能够提前返回结果，而不用遍历整个数组，同时也能使代码得到简化。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> limit = nums.length &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">int</span> count = map.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; limit) <span class="keyword">return</span> num;</span><br><span class="line">            map.put(num, count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：13 ms, 在所有 Java 提交中击败了26.95%的用户<br>内存消耗：43.6 MB, 在所有 Java 提交中击败了31.77%的用户</p>
+          </div>
+
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>数组排序，数组中一个元素出现次数如果超过数组长度的一半，那么在数组有序的情况下，数组中间值一定就是这个元素。</p>
+<blockquote>
+<p>时间复杂度:$O(n\log{}n)$&emsp;空间复杂度:$O(\log{}n)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">return</span> nums[nums.length / <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：2 ms, 在所有 Java 提交中击败了60.67%的用户<br>内存消耗：44.5 MB, 在所有 Java 提交中击败了5.00%的用户</p>
+          </div>
+
+<h5 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h5><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210605170502.png" style="zoom:67%;"/></div>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%95%B0%E6%8A%95%E7%A5%A8%E7%AE%97%E6%B3%95">摩尔投票法</a>，核心思想是在一组元素中，如果有元素数量上占优势，也就是超过元素总数的一半，此时所有元素可以被分为两类，我们把数量占优势的元素记为 A，把其他的元素记为 B，对于 A 类元素而言，在所有元素中数量最多，且 A 类中的元素也全部相同，对于 B 类元素而言，在所有元素中数量相对较少，且 B 类中的元素可能相同也可能不同。在这种情况下，我们用一个 A 类元素抵消掉一个 B 类元素，很明显，B 类元素会首先被消耗完，剩下的元素就都是 A 类元素。从算法实现上来说，一开始不知道那个元素是 A 类元素，那个元素是 B 类元素，所以先选定一个候选者 <code>candidate</code> 然后对候选者进行投票，如果当前元素和候选者相同，票数加1，否则票数减1，一个候选者得票为0时，将被下一个候选者替换，最终剩下的候选者就是出现次数最多的元素。</p>
+<blockquote>
+<p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(1)$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>, candidate = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">                candidate = num;</span><br><span class="line">            &#125;</span><br><span class="line">            count += (num == candidate) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.95%的用户<br>内存消耗：41.7 MB, 在所有 Java 提交中击败了68.26%的用户</p>
+          </div>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
+        <tag>Bit Manipulation</tag>
+        <tag>Divide and Conquer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>二叉树的最近公共祖先</title>
     <url>/posts/2021/05fd4c32db/</url>
     <content><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
@@ -91,9 +144,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -139,9 +192,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Hash Table</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -181,9 +234,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -230,9 +283,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Medium</tag>
         <tag>Tree</tag>
+        <tag>Medium</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -274,8 +327,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -347,9 +400,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Interview</tag>
         <tag>Easy</tag>
         <tag>Linked List</tag>
-        <tag>Interview</tag>
       </tags>
   </entry>
   <entry>
@@ -389,10 +442,10 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Interview</tag>
         <tag>Easy</tag>
         <tag>Sort</tag>
         <tag>Hash Table</tag>
-        <tag>Interview</tag>
       </tags>
   </entry>
   <entry>
@@ -419,10 +472,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
-        <tag>String</tag>
-        <tag>Hash Table</tag>
         <tag>Interview</tag>
+        <tag>Easy</tag>
+        <tag>Hash Table</tag>
+        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -450,9 +503,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>Depth-first Search</tag>
         <tag>Interview</tag>
+        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -495,8 +548,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Stack</tag>
         <tag>Sliding Window</tag>
       </tags>
@@ -541,8 +594,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Divide and Conquer</tag>
         <tag>Dynamic Programming</tag>
       </tags>
@@ -586,8 +639,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -636,10 +689,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
         <tag>Interview</tag>
+        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -686,8 +739,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Bit Manipulation</tag>
       </tags>
   </entry>
@@ -727,9 +780,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -770,10 +823,10 @@
       </categories>
       <tags>
         <tag>Depth-first Search</tag>
-        <tag>Backtracking</tag>
-        <tag>String</tag>
-        <tag>Recursion</tag>
         <tag>Interview</tag>
+        <tag>Recursion</tag>
+        <tag>String</tag>
+        <tag>Backtracking</tag>
       </tags>
   </entry>
   <entry>
@@ -809,8 +862,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Divide and Conquer</tag>
       </tags>
   </entry>
@@ -850,8 +903,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
         <tag>Binary Search</tag>
       </tags>
@@ -890,10 +943,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -935,9 +988,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Tree</tag>
+        <tag>Easy</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -972,8 +1025,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Linked List</tag>
       </tags>
   </entry>
@@ -1025,8 +1078,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
         <tag>Binary Search</tag>
       </tags>
@@ -1071,8 +1124,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1104,8 +1157,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1140,8 +1193,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1176,8 +1229,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Stack</tag>
         <tag>Design</tag>
       </tags>
@@ -1218,8 +1271,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Binary Search</tag>
       </tags>
   </entry>
@@ -1263,9 +1316,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Recursion</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1319,8 +1372,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Divide and Conquer</tag>
         <tag>Heap</tag>
       </tags>
@@ -1358,8 +1411,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Linked List</tag>
       </tags>
   </entry>
@@ -1400,9 +1453,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>String</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1449,9 +1502,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>String</tag>
+        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1489,8 +1542,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Medium</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1539,8 +1592,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Linked List</tag>
       </tags>
   </entry>
@@ -1569,8 +1622,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Linked List</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1621,8 +1674,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
+        <tag>LCOF</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1668,10 +1721,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>LCOF</tag>
         <tag>Easy</tag>
-        <tag>Array</tag>
         <tag>Hash Table</tag>
+        <tag>LCOF</tag>
+        <tag>Array</tag>
       </tags>
   </entry>
 </search>
