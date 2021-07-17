@@ -6,7 +6,7 @@
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
-  <updated>2021-07-13T16:55:22.706Z</updated>
+  <updated>2021-07-17T16:56:15.400Z</updated>
   <id>https://yilo.top/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>复杂链表的复制</title>
+    <link href="https://yilo.top/posts/2021/0768dc24ea/"/>
+    <id>https://yilo.top/posts/2021/0768dc24ea/</id>
+    <published>2021-07-18T15:00:00.000Z</published>
+    <updated>2021-07-17T16:56:15.400Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>请实现 <code>copyRandomList</code> 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 <code>next</code> 指针指向下一个节点，还有一个 <code>random</code> 指针指向链表中的任意节点或者 <code>null</code>。</p><p><strong>示例 1：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150650.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head &#x3D; [[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br><span class="line">输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150731.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head &#x3D; [[1,1],[2,1]]</span><br><span class="line">输出：[[1,1],[2,1]]</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150814.png" style="zoom:67%;" /></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head &#x3D; [[3,null],[3,0],[3,null]]</span><br><span class="line">输出：[[3,null],[3,0],[3,null]]</span><br></pre></td></tr></table></figure><p><strong>示例 4：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head &#x3D; []</span><br><span class="line">输出：[]</span><br><span class="line">解释：给定的链表为空（空指针），因此返回 null。</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>-10000 &lt;= Node.val &lt;= 10000</code></li><li><code>Node.random</code> 为空（null）或指向链表中的节点。</li><li>节点数目不超过 1000 。</li></ul><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>哈希表，遍历链表，为链表中的每个节点生成一个新的节点，把当前节点和新节点的对应关系存入哈希表中，再次遍历，通过当前节点和新节点的对应关系，当前节点和随机节点的的对应关系，我们就可以构造出新节点和新随机节点的对应关系，重复这一过程，直至链表末端，就完成了复杂链表的复制。</p><blockquote><p>时间复杂度:$O(n)$&emsp;空间复杂度:$O(n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    Node next;</span></span><br><span class="line"><span class="comment">    Node random;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    public Node(int val) &#123;</span></span><br><span class="line"><span class="comment">        this.val = val;</span></span><br><span class="line"><span class="comment">        this.next = null;</span></span><br><span class="line"><span class="comment">        this.random = null;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">copyRandomList</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        Map&lt;Node,Node&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        Node curr = head;</span><br><span class="line">        <span class="keyword">while</span> (curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Node node = <span class="keyword">new</span> Node(curr.val);</span><br><span class="line">            map.put(curr,node);</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        curr = head;</span><br><span class="line">        <span class="keyword">while</span>( curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Node node = map.get(curr);</span><br><span class="line">            node.next = map.get(curr.next);</span><br><span class="line">            node.random = map.get(curr.random);</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map.get(head);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户<br>内存消耗：38.3 MB, 在所有 Java 提交中击败了26.46%的用户</p>          </div>]]></content>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;请实现 &lt;code&gt;copyRandomList&lt;/code&gt; 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 &lt;code&gt;next&lt;/code&gt; 指针指向下一个节点，还有一个 &lt;code&gt;random&lt;/code&gt; 指针指向链表中的任意节点或者 &lt;code&gt;null&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
+&lt;div style=&quot;display: inline-block;&quot;&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150650.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：head &amp;#x3D; [[7,null],[13,0],[11,4],[10,2],[1,0]]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;示例 2：&lt;/strong&gt;&lt;/p&gt;
+&lt;div style=&quot;display: inline-block;&quot;&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150731.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：head &amp;#x3D; [[1,1],[2,1]]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[[1,1],[2,1]]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;示例 3：&lt;/strong&gt;&lt;/p&gt;
+&lt;div style=&quot;display: inline-block;&quot;&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210320150814.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：head &amp;#x3D; [[3,null],[3,0],[3,null]]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[[3,null],[3,0],[3,null]]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;示例 4：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：head &amp;#x3D; []&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：[]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;解释：给定的链表为空（空指针），因此返回 null。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;提示：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-10000 &amp;lt;= Node.val &amp;lt;= 10000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Node.random&lt;/code&gt; 为空（null）或指向链表中的节点。&lt;/li&gt;
+&lt;li&gt;节点数目不超过 1000 。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+  </entry>
   
   <entry>
     <title>从上到下打印二叉树</title>
@@ -39,11 +88,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Breadth-first Search" scheme="https://yilo.top/tags/Breadth-first-Search/"/>
     
@@ -78,9 +127,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
@@ -106,13 +155,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
+    
+    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
   </entry>
   
@@ -148,11 +197,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -176,11 +225,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -208,11 +257,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Breadth-first Search" scheme="https://yilo.top/tags/Breadth-first-Search/"/>
     
@@ -248,11 +297,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -280,9 +329,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Array" scheme="https://yilo.top/tags/Array/"/>
     
@@ -313,11 +362,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
-    
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
   </entry>
   
@@ -345,13 +394,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
     
   </entry>
   
@@ -377,13 +426,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
-    <category term="String" scheme="https://yilo.top/tags/String/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    <category term="String" scheme="https://yilo.top/tags/String/"/>
     
   </entry>
   
@@ -410,11 +459,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -445,9 +494,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Stack" scheme="https://yilo.top/tags/Stack/"/>
     
@@ -480,9 +529,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
@@ -514,9 +563,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -551,13 +600,13 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
-    
     <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
     <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
+    
+    <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
   </entry>
   
@@ -587,9 +636,9 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
     <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
     
@@ -618,11 +667,11 @@
     <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
+    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
   </entry>
   
@@ -631,7 +680,7 @@
     <link href="https://yilo.top/posts/2021/03a433fb66/"/>
     <id>https://yilo.top/posts/2021/03a433fb66/</id>
     <published>2021-03-29T06:57:00.000Z</published>
-    <updated>2021-06-05T09:11:09.928Z</updated>
+    <updated>2021-07-17T16:54:43.345Z</updated>
     
     <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p><p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p><div style="display: inline-block;"><img src="https://cdn.jsdelivr.net/gh/yisimg/storage/img/20210408150904.png" style="zoom:67%;"/></div><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;23&quot;</span><br><span class="line">输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;&quot;</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：digits &#x3D; &quot;2&quot;</span><br><span class="line">输出：[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>0 &lt;= digits.length &lt;= 4</code></li><li><code>digits[i]</code> 是范围<code> [&#39;2&#39;, &#39;9&#39;]</code> 的一个数字。</li></ul><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>递归+回溯，先构建数字和字母的对应关系，从字符串首个数字出发，获取数字对应的英文字母串，从字母串首个字母开始，拼接字符，递归处理字符串下一个数字，处理完之后，回溯，删除当前拼接的字符，当字符串索引值与其长度相等的时候，拼接得到的新字符串就是符合要求的一种情况，把它添加到结果列表中，跳出递归，整个递归结束就能得到所有字母组合的结果。</p><blockquote><p>时间复杂度:$O(3^m \times 4^n)$&emsp;空间复杂度:$O(m + n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String nums = <span class="string">&quot;23456789&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> Map&lt;Character, String&gt; dict = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> String[] words = &#123;<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;def&quot;</span>, <span class="string">&quot;ghi&quot;</span>, <span class="string">&quot;jkl&quot;</span>, <span class="string">&quot;mno&quot;</span>, <span class="string">&quot;pqrs&quot;</span>, <span class="string">&quot;tuv&quot;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">letterCombinations</span><span class="params">(String digits)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (digits == <span class="keyword">null</span> || digits.isEmpty()) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length(); i++) &#123;</span><br><span class="line">            dict.put(nums.charAt(i), words[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(digits, <span class="number">0</span>, <span class="keyword">new</span> StringBuilder());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(String digits, <span class="keyword">int</span> index, StringBuilder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index == digits.length()) &#123;</span><br><span class="line">            res.add(builder.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String word = dict.get(digits.charAt(index));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); i++) &#123;</span><br><span class="line">            builder.append(word.charAt(i));</span><br><span class="line">            dfs(digits, index + <span class="number">1</span>, builder);</span><br><span class="line">            builder.deleteCharAt(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了83.34%的用户<br>内存消耗：37 MB, 在所有 Java 提交中击败了81.79%的用户</p>          </div>]]></content>
     
@@ -662,41 +711,13 @@
     
     <category term="Depth-first Search" scheme="https://yilo.top/tags/Depth-first-Search/"/>
     
-    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
+    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
     
     <category term="String" scheme="https://yilo.top/tags/String/"/>
     
     <category term="Recursion" scheme="https://yilo.top/tags/Recursion/"/>
     
-    <category term="Interview" scheme="https://yilo.top/tags/Interview/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>合并两个排序的链表</title>
-    <link href="https://yilo.top/posts/2021/03faa1cd64/"/>
-    <id>https://yilo.top/posts/2021/03faa1cd64/</id>
-    <published>2021-03-29T06:13:00.000Z</published>
-    <updated>2021-03-30T05:33:01.568Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。<br><strong>示例1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure><p><strong>限制：</strong><br><code>0 &lt;= 链表长度 &lt;= 1000</code></p><span id="more"></span><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/">Leetcode</a></p><h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>迭代，初始化一个伪头节点<code>prev</code>，和当前节点<code>curr</code>，每次比较两个链表当前值的大小，将<code>curr</code>节点的下一个节点指向两个链表中值较小的节点，再把当前节点和较小值节点向后移动一位。当其中一个链表到达表尾的时侯，如果另一个链表还有剩余节点，则直接把当前节点的下一个节点指向剩余的节点的第一个节点。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(1)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        ListNode prev = <span class="keyword">new</span> ListNode(-<span class="number">1</span>), curr = prev;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">                curr.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                curr.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        curr.next = l1 == <span class="keyword">null</span> ? l2 : l1;</span><br><span class="line">        <span class="keyword">return</span> prev.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.66%的用户<br>内存消耗：38 MB, 在所有 Java 提交中击败了99.86%的用户</p>          </div><h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>递归，有一个链表节点是空节点就返回另一个链表节点，比较两个链表的节点值，把值较小节点的下一个节点指向下一层递归返回的节点，然后返回值较小的节点，递归结束就能得到合并之后的链表。</p><blockquote><p>时间复杂度:$O(m + n)$&emsp;空间复杂度:$O(m + n)$</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">        <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line">        <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">            l1.next = mergeTwoLists(l1.next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            l2.next = mergeTwoLists(l1, l2.next);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note success">            <p>执行用时：1 ms, 在所有 Java 提交中击败了99.66%的用户<br>内存消耗：38.6 MB, 在所有 Java 提交中击败了48.44%的用户</p>          </div>]]></content>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h4&gt;&lt;p&gt;输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。&lt;br&gt;&lt;strong&gt;示例1：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;限制：&lt;/strong&gt;&lt;br&gt;&lt;code&gt;0 &amp;lt;= 链表长度 &amp;lt;= 1000&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yilo.top/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
-    
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
-    
-    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
+    <category term="Backtracking" scheme="https://yilo.top/tags/Backtracking/"/>
     
   </entry>
   
