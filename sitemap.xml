@@ -9,7 +9,7 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/about/index.html</loc>
+    <loc>https://yilo.top/readings/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/readings/index.html</loc>
+    <loc>https://yilo.top/tags/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/index.html</loc>
+    <loc>https://yilo.top/about/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
@@ -368,13 +368,6 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Tree/</loc>
-    <lastmod>2022-11-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yilo.top/tags/Bit-Manipulation/</loc>
     <lastmod>2022-11-06</lastmod>
     <changefreq>daily</changefreq>
@@ -383,6 +376,13 @@
   
   <url>
     <loc>https://yilo.top/tags/Divide-and-Conquer/</loc>
+    <lastmod>2022-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Tree/</loc>
     <lastmod>2022-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -480,14 +480,7 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Binary-Search/</loc>
-    <lastmod>2022-11-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/tags/Breadth-first-Search/</loc>
+    <loc>https://yilo.top/tags/Interview/</loc>
     <lastmod>2022-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -501,7 +494,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Interview/</loc>
+    <loc>https://yilo.top/tags/Breadth-first-Search/</loc>
+    <lastmod>2022-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Binary-Search/</loc>
     <lastmod>2022-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
