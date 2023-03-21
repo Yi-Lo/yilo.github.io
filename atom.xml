@@ -92,9 +92,9 @@
     
     <category term="Medium" scheme="https://yilo.top/tags/Medium/"/>
     
-    <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
-    
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
+    
+    <category term="Linked List" scheme="https://yilo.top/tags/Linked-List/"/>
     
   </entry>
   
@@ -431,9 +431,9 @@
     
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
-    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
-    
     <category term="Hash Table" scheme="https://yilo.top/tags/Hash-Table/"/>
+    
+    <category term="Sort" scheme="https://yilo.top/tags/Sort/"/>
     
   </entry>
   
