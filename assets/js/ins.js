@@ -123,7 +123,7 @@
                 <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
             </figure>';
         }
-        ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '年<em>' + data.month + '月</em></h1>\
+        ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '年<em>' + data.month + '月' + data.day + '日</em></h1>\
         <ul class="img-box-ul">' + liTmpl + '</ul>\
         </section>';
       }
@@ -142,6 +142,7 @@
       for (var i = 0, len = data.length; i < len; i++) {
         var y = data[i].y;
         var m = data[i].m;
+        var d = data[i].d;
         var src = replacer(data[i].src);
         var text = data[i].text;
         var key = y + "" + ((m + "").length == 1 ? "0" + m : m);
@@ -152,6 +153,7 @@
           imgObj[key] = {
             year: y,
             month: m,
+            day: d,
             srclist: [src],
             text: [text]
           };
