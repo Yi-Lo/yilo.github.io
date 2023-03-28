@@ -82,9 +82,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -133,8 +133,8 @@
       </categories>
       <tags>
         <tag>Medium</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
@@ -163,9 +163,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -316,9 +316,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -406,9 +406,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -455,9 +455,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -675,9 +675,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Depth-first Search</tag>
         <tag>Interview</tag>
         <tag>Medium</tag>
+        <tag>Depth-first Search</tag>
       </tags>
   </entry>
   <entry>
@@ -859,10 +859,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Depth-first Search</tag>
         <tag>Interview</tag>
         <tag>Medium</tag>
+        <tag>Depth-first Search</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -950,9 +950,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -992,8 +992,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Depth-first Search</tag>
         <tag>Interview</tag>
+        <tag>Depth-first Search</tag>
         <tag>String</tag>
         <tag>Recursion</tag>
         <tag>Backtracking</tag>
@@ -1113,10 +1113,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Depth-first Search</tag>
         <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -1158,9 +1158,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
         <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -1196,8 +1196,8 @@
       </categories>
       <tags>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
@@ -1582,8 +1582,8 @@
       </categories>
       <tags>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
@@ -1763,8 +1763,8 @@
       </categories>
       <tags>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
@@ -1793,8 +1793,8 @@
       </categories>
       <tags>
         <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Linked List</tag>
         <tag>Two Pointers</tag>
       </tags>
   </entry>
