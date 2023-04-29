@@ -190,11 +190,11 @@
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
-    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Bit Manipulation" scheme="https://yilo.top/tags/Bit-Manipulation/"/>
+    
+    <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
   </entry>
   
@@ -564,11 +564,11 @@
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
-    <category term="Dynamic Programming" scheme="https://yilo.top/tags/Dynamic-Programming/"/>
+    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
     
     <category term="Divide and Conquer" scheme="https://yilo.top/tags/Divide-and-Conquer/"/>
     
-    <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    <category term="Dynamic Programming" scheme="https://yilo.top/tags/Dynamic-Programming/"/>
     
   </entry>
   

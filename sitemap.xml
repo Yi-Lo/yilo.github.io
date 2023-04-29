@@ -30,6 +30,13 @@
   </url>
   
   <url>
+    <loc>https://yilo.top/categories/index.html</loc>
+    
+    <lastmod>2022-11-06</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yilo.top/readings/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>https://yilo.top/tags/index.html</loc>
-    
-    <lastmod>2022-11-06</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/categories/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
@@ -375,20 +375,6 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Dynamic-Programming/</loc>
-    <lastmod>2023-04-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/tags/Divide-and-Conquer/</loc>
-    <lastmod>2023-04-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yilo.top/tags/Easy/</loc>
     <lastmod>2023-04-29</lastmod>
     <changefreq>daily</changefreq>
@@ -410,6 +396,13 @@
   </url>
   
   <url>
+    <loc>https://yilo.top/tags/Divide-and-Conquer/</loc>
+    <lastmod>2023-04-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yilo.top/tags/Depth-first-Search/</loc>
     <lastmod>2023-04-29</lastmod>
     <changefreq>daily</changefreq>
@@ -417,14 +410,7 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Array/</loc>
-    <lastmod>2023-04-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yilo.top/tags/Backtracking/</loc>
+    <loc>https://yilo.top/tags/Dynamic-Programming/</loc>
     <lastmod>2023-04-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -445,7 +431,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Recursion/</loc>
+    <loc>https://yilo.top/tags/Array/</loc>
+    <lastmod>2023-04-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Backtracking/</loc>
     <lastmod>2023-04-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -460,6 +453,13 @@
   
   <url>
     <loc>https://yilo.top/tags/Sort/</loc>
+    <lastmod>2023-04-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yilo.top/tags/Recursion/</loc>
     <lastmod>2023-04-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
