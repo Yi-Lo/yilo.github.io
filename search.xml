@@ -266,9 +266,9 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
+        <tag>Divide and Conquer</tag>
         <tag>Easy</tag>
         <tag>Bit Manipulation</tag>
-        <tag>Divide and Conquer</tag>
       </tags>
   </entry>
   <entry>
@@ -767,9 +767,9 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Easy</tag>
-        <tag>Divide and Conquer</tag>
         <tag>Dynamic Programming</tag>
+        <tag>Divide and Conquer</tag>
+        <tag>Easy</tag>
       </tags>
   </entry>
   <entry>
@@ -994,8 +994,8 @@
       <tags>
         <tag>Depth-first Search</tag>
         <tag>Backtracking</tag>
-        <tag>String</tag>
         <tag>Recursion</tag>
+        <tag>String</tag>
         <tag>Interview</tag>
       </tags>
   </entry>
@@ -1033,8 +1033,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Divide and Conquer</tag>
+        <tag>Easy</tag>
       </tags>
   </entry>
   <entry>
@@ -1543,8 +1543,8 @@
       </categories>
       <tags>
         <tag>LCOF</tag>
-        <tag>Easy</tag>
         <tag>Divide and Conquer</tag>
+        <tag>Easy</tag>
         <tag>Heap</tag>
       </tags>
   </entry>
