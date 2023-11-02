@@ -30,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/index.html</loc>
+    <loc>https://yilo.top/categories/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/about/index.html</loc>
+    <loc>https://yilo.top/tags/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yilo.top/categories/index.html</loc>
+    <loc>https://yilo.top/about/index.html</loc>
     
     <lastmod>2022-11-06</lastmod>
     
@@ -438,14 +438,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Array/</loc>
+    <loc>https://yilo.top/tags/Backtracking/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Backtracking/</loc>
+    <loc>https://yilo.top/tags/Array/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -508,14 +508,14 @@
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Linked-List/</loc>
+    <loc>https://yilo.top/tags/Binary-Search/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yilo.top/tags/Binary-Search/</loc>
+    <loc>https://yilo.top/tags/Linked-List/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
