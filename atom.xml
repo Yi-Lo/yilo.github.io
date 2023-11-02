@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>艺新杂记</title>
+  <title>艺新</title>
   
-  <subtitle>沉淀新知 探索未知</subtitle>
+  <subtitle>温故而知新</subtitle>
   <link href="https://yilo.top/atom.xml" rel="self"/>
   
   <link href="https://yilo.top/"/>
@@ -232,9 +232,9 @@
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
@@ -292,9 +292,9 @@
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
     <category term="Breadth-first Search" scheme="https://yilo.top/tags/Breadth-first-Search/"/>
     
@@ -702,9 +702,9 @@
     
     <category term="LCOF" scheme="https://yilo.top/tags/LCOF/"/>
     
-    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
-    
     <category term="Easy" scheme="https://yilo.top/tags/Easy/"/>
+    
+    <category term="Tree" scheme="https://yilo.top/tags/Tree/"/>
     
   </entry>
   
