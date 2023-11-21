@@ -82,9 +82,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -132,9 +132,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Medium</tag>
         <tag>Linked List</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -163,9 +163,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -213,8 +213,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
         <tag>Stack</tag>
       </tags>
   </entry>
@@ -265,8 +265,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Bit Manipulation</tag>
         <tag>Divide and Conquer</tag>
       </tags>
@@ -316,9 +316,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -364,9 +364,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Hash Table</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -406,9 +406,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Tree</tag>
         <tag>Breadth-first Search</tag>
       </tags>
   </entry>
@@ -455,9 +455,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -499,8 +499,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -572,8 +572,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Interview</tag>
         <tag>Easy</tag>
+        <tag>Interview</tag>
         <tag>Linked List</tag>
       </tags>
   </entry>
@@ -614,10 +614,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Interview</tag>
         <tag>Easy</tag>
-        <tag>Hash Table</tag>
         <tag>Sort</tag>
+        <tag>Hash Table</tag>
+        <tag>Interview</tag>
       </tags>
   </entry>
   <entry>
@@ -644,10 +644,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Interview</tag>
         <tag>Easy</tag>
-        <tag>Hash Table</tag>
         <tag>String</tag>
+        <tag>Hash Table</tag>
+        <tag>Interview</tag>
       </tags>
   </entry>
   <entry>
@@ -675,9 +675,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Medium</tag>
         <tag>Depth-first Search</tag>
         <tag>Interview</tag>
-        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -720,8 +720,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
         <tag>Stack</tag>
         <tag>Sliding Window</tag>
       </tags>
@@ -766,8 +766,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Divide and Conquer</tag>
         <tag>Dynamic Programming</tag>
       </tags>
@@ -811,8 +811,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -859,10 +859,10 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>Medium</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
         <tag>Interview</tag>
-        <tag>Medium</tag>
       </tags>
   </entry>
   <entry>
@@ -909,8 +909,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Bit Manipulation</tag>
       </tags>
   </entry>
@@ -950,9 +950,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -993,10 +993,10 @@
       </categories>
       <tags>
         <tag>Depth-first Search</tag>
-        <tag>Interview</tag>
+        <tag>Backtracking</tag>
         <tag>String</tag>
         <tag>Recursion</tag>
-        <tag>Backtracking</tag>
+        <tag>Interview</tag>
       </tags>
   </entry>
   <entry>
@@ -1032,8 +1032,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Divide and Conquer</tag>
       </tags>
   </entry>
@@ -1073,8 +1073,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
         <tag>Binary Search</tag>
       </tags>
@@ -1113,10 +1113,10 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Tree</tag>
         <tag>Depth-first Search</tag>
-        <tag>Easy</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1158,9 +1158,9 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Tree</tag>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
+        <tag>Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -1195,9 +1195,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Linked List</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1248,8 +1248,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
         <tag>Binary Search</tag>
       </tags>
@@ -1294,8 +1294,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1327,8 +1327,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1363,8 +1363,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1399,8 +1399,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Stack</tag>
         <tag>Design</tag>
       </tags>
@@ -1441,8 +1441,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Binary Search</tag>
       </tags>
   </entry>
@@ -1486,9 +1486,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Recursion</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1542,8 +1542,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Divide and Conquer</tag>
         <tag>Heap</tag>
       </tags>
@@ -1581,9 +1581,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Linked List</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1623,9 +1623,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>String</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1672,9 +1672,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>String</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1712,8 +1712,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Medium</tag>
         <tag>LCOF</tag>
+        <tag>Medium</tag>
         <tag>Array</tag>
         <tag>Two Pointers</tag>
       </tags>
@@ -1762,9 +1762,9 @@
         <category>算法</category>
       </categories>
       <tags>
+        <tag>LCOF</tag>
         <tag>Easy</tag>
         <tag>Linked List</tag>
-        <tag>LCOF</tag>
       </tags>
   </entry>
   <entry>
@@ -1792,10 +1792,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
-        <tag>Linked List</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Two Pointers</tag>
+        <tag>Linked List</tag>
       </tags>
   </entry>
   <entry>
@@ -1844,8 +1844,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
       </tags>
   </entry>
@@ -1891,10 +1891,10 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Easy</tag>
-        <tag>Hash Table</tag>
         <tag>LCOF</tag>
+        <tag>Easy</tag>
         <tag>Array</tag>
+        <tag>Hash Table</tag>
       </tags>
   </entry>
 </search>
